@@ -1038,14 +1038,14 @@ void set_from_triplets(const InputIterator& begin, const InputIterator& end, Spa
     // pass 1: count the nnz per inner-vector
     typename SparseMatrixType::IndexVector wi(trMat.outerSize());
     wi.setZero();
-    for(InputIterator it(begin); it!=end; ++it)
+    for(InputIterator it{begin}; it!=end; ++it)
     {
       eigen_assert(it->row()>=0 && it->row()<mat.rows() && it->col()>=0 && it->col()<mat.cols());
       wi(IsRowMajor ? it->col() : it->row())++;
     }
 
     // pass 2: insert all the elements into trMat
-    trMat.reserve(wi);
+    //trMat.reserve(wi);
     for(InputIterator it(begin); it!=end; ++it)
       trMat.insertBackUncompressed(it->row(),it->col()) = it->value();
 
