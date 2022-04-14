@@ -54,7 +54,7 @@ struct traits<BDCSVD<_MatrixType> >
  *
  * \brief class Bidiagonal Divide and Conquer SVD
  *
- * \tparam _MatrixType the type of the matrix of which we are computing the SVD decomposition
+ * \tparam _MatrixType the type of the matrix of which we are computing the SVD descene
  *
  * This class first reduces the input matrix to bi-diagonal form using class UpperBidiagonalization,
  * and then performs a divide-and-conquer diagonalization. Small blocks are diagonalized using class JacobiSVD.
@@ -109,7 +109,7 @@ public:
   /** \brief Default Constructor.
    *
    * The default constructor is useful in cases in which the user intends to
-   * perform decompositions via BDCSVD::compute(const MatrixType&).
+   * perform descenes via BDCSVD::compute(const MatrixType&).
    */
   BDCSVD() : m_algoswap(16), m_isTranspose(false), m_compU(false), m_compV(false), m_numIters(0)
   {}
@@ -127,7 +127,7 @@ public:
     allocate(rows, cols, computationOptions);
   }
 
-  /** \brief Constructor performing the decomposition of given matrix.
+  /** \brief Constructor performing the descene of given matrix.
    *
    * \param matrix the matrix to decompose
    * \param computationOptions optional parameter allowing to specify if you want full or thin U or V unitaries to be computed.
@@ -147,7 +147,7 @@ public:
   {
   }
   
-  /** \brief Method performing the decomposition of given matrix using custom options.
+  /** \brief Method performing the descene of given matrix using custom options.
    *
    * \param matrix the matrix to decompose
    * \param computationOptions optional parameter allowing to specify if you want full or thin U or V unitaries to be computed.
@@ -159,7 +159,7 @@ public:
    */
   BDCSVD& compute(const MatrixType& matrix, unsigned int computationOptions);
 
-  /** \brief Method performing the decomposition of given matrix using current options.
+  /** \brief Method performing the descene of given matrix using current options.
    *
    * \param matrix the matrix to decompose
    *
@@ -1333,7 +1333,7 @@ void BDCSVD<MatrixType>::deflation(Eigen::Index firstCol, Eigen::Index lastCol, 
 #if !defined(EIGEN_GPUCC)
 /** \svd_module
   *
-  * \return the singular value decomposition of \c *this computed by Divide & Conquer algorithm
+  * \return the singular value descene of \c *this computed by Divide & Conquer algorithm
   *
   * \sa class BDCSVD
   */

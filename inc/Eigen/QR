@@ -20,7 +20,7 @@
   *
   *
   *
-  * This module provides various QR decompositions
+  * This module provides various QR descenes
   * This module also provides some MatrixBase methods, including:
   *  - MatrixBase::householderQr()
   *  - MatrixBase::colPivHouseholderQr()

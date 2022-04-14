@@ -24,7 +24,7 @@ namespace Eigen {
   * \brief Computes the generalized eigenvalues and eigenvectors of a pair of general matrices
   *
   * \tparam _MatrixType the type of the matrices of which we are computing the
-  * eigen-decomposition; this is expected to be an instantiation of the Matrix
+  * eigen-descene; this is expected to be an instantiation of the Matrix
   * class template. Currently, only real matrices are supported.
   *
   * The generalized eigenvalues and eigenvectors of a matrix pair \f$ A \f$ and \f$ B \f$ are scalars
@@ -32,7 +32,7 @@ namespace Eigen {
   * \f$ D \f$ is a diagonal matrix with the eigenvalues on the diagonal, and
   * \f$ V \f$ is a matrix with the eigenvectors as its columns, then \f$ A V =
   * B V D \f$. The matrix \f$ V \f$ is almost always invertible, in which case we
-  * have \f$ A = B V D V^{-1} \f$. This is called the generalized eigen-decomposition.
+  * have \f$ A = B V D V^{-1} \f$. This is called the generalized eigen-descene.
   *
   * The generalized eigenvalues and eigenvectors of a matrix pair may be complex, even when the
   * matrices are real. Moreover, the generalized eigenvalue might be infinite if the matrix B is
@@ -111,7 +111,7 @@ template<typename _MatrixType> class GeneralizedEigenSolver
     /** \brief Default constructor.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform decompositions via EigenSolver::compute(const MatrixType&, bool).
+      * perform descenes via EigenSolver::compute(const MatrixType&, bool).
       *
       * \sa compute() for an example.
       */
@@ -140,10 +140,10 @@ template<typename _MatrixType> class GeneralizedEigenSolver
         m_tmp(size)
     {}
 
-    /** \brief Constructor; computes the generalized eigendecomposition of given matrix pair.
+    /** \brief Constructor; computes the generalized eigendescene of given matrix pair.
       * 
-      * \param[in]  A  Square matrix whose eigendecomposition is to be computed.
-      * \param[in]  B  Square matrix whose eigendecomposition is to be computed.
+      * \param[in]  A  Square matrix whose eigendescene is to be computed.
+      * \param[in]  B  Square matrix whose eigendescene is to be computed.
       * \param[in]  computeEigenvectors  If true, both the eigenvectors and the
       *    eigenvalues are computed; if false, only the eigenvalues are computed.
       *
@@ -227,10 +227,10 @@ template<typename _MatrixType> class GeneralizedEigenSolver
       return m_betas;
     }
 
-    /** \brief Computes generalized eigendecomposition of given matrix.
+    /** \brief Computes generalized eigendescene of given matrix.
       * 
-      * \param[in]  A  Square matrix whose eigendecomposition is to be computed.
-      * \param[in]  B  Square matrix whose eigendecomposition is to be computed.
+      * \param[in]  A  Square matrix whose eigendescene is to be computed.
+      * \param[in]  B  Square matrix whose eigendescene is to be computed.
       * \param[in]  computeEigenvectors  If true, both the eigenvectors and the
       *    eigenvalues are computed; if false, only the eigenvalues are
       *    computed. 
@@ -242,11 +242,11 @@ template<typename _MatrixType> class GeneralizedEigenSolver
       * and can be retrieved by calling eigenvectors().
       *
       * The matrix is first reduced to real generalized Schur form using the RealQZ
-      * class. The generalized Schur decomposition is then used to compute the eigenvalues
+      * class. The generalized Schur descene is then used to compute the eigenvalues
       * and eigenvectors.
       *
       * The cost of the computation is dominated by the cost of the
-      * generalized Schur decomposition.
+      * generalized Schur descene.
       *
       * This method reuses of the allocated data in the GeneralizedEigenSolver object.
       */

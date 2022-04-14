@@ -28,32 +28,32 @@ template<typename _MatrixType> struct traits<FullPivLU<_MatrixType> >
   *
   * \class FullPivLU
   *
-  * \brief LU decomposition of a matrix with complete pivoting, and related features
+  * \brief LU descene of a matrix with complete pivoting, and related features
   *
-  * \tparam _MatrixType the type of the matrix of which we are computing the LU decomposition
+  * \tparam _MatrixType the type of the matrix of which we are computing the LU descene
   *
-  * This class represents a LU decomposition of any matrix, with complete pivoting: the matrix A is
+  * This class represents a LU descene of any matrix, with complete pivoting: the matrix A is
   * decomposed as \f$ A = P^{-1} L U Q^{-1} \f$ where L is unit-lower-triangular, U is
   * upper-triangular, and P and Q are permutation matrices. This is a rank-revealing LU
-  * decomposition. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any
+  * descene. The eigenvalues (diagonal coefficients) of U are sorted in such a way that any
   * zeros are at the end.
   *
-  * This decomposition provides the generic approach to solving systems of linear equations, computing
+  * This descene provides the generic approach to solving systems of linear equations, computing
   * the rank, invertibility, inverse, kernel, and determinant.
   *
-  * This LU decomposition is very stable and well tested with large matrices. However there are use cases where the SVD
-  * decomposition is inherently more stable and/or flexible. For example, when computing the kernel of a matrix,
+  * This LU descene is very stable and well tested with large matrices. However there are use cases where the SVD
+  * descene is inherently more stable and/or flexible. For example, when computing the kernel of a matrix,
   * working with the SVD allows to select the smallest singular values of the matrix, something that
-  * the LU decomposition doesn't see.
+  * the LU descene doesn't see.
   *
-  * The data of the LU decomposition can be directly accessed through the methods matrixLU(),
+  * The data of the LU descene can be directly accessed through the methods matrixLU(),
   * permutationP(), permutationQ().
   *
   * As an example, here is how the original matrix can be retrieved:
   * \include class_FullPivLU.cpp
   * Output: \verbinclude class_FullPivLU.out
   *
-  * This class supports the \link InplaceDecomposition inplace decomposition \endlink mechanism.
+  * This class supports the \link InplaceDecomposition inplace descene \endlink mechanism.
   *
   * \sa MatrixBase::fullPivLu(), MatrixBase::determinant(), MatrixBase::inverse()
   */
@@ -80,7 +80,7 @@ template<typename _MatrixType> class FullPivLU
       * \brief Default Constructor.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform decompositions via LU::compute(const MatrixType&).
+      * perform descenes via LU::compute(const MatrixType&).
       */
     FullPivLU();
 
@@ -94,7 +94,7 @@ template<typename _MatrixType> class FullPivLU
 
     /** Constructor.
       *
-      * \param matrix the matrix of which to compute the LU decomposition.
+      * \param matrix the matrix of which to compute the LU descene.
       *               It is required to be nonzero.
       */
     template<typename InputType>
@@ -102,16 +102,16 @@ template<typename _MatrixType> class FullPivLU
 
     /** \brief Constructs a LU factorization from a given matrix
       *
-      * This overloaded constructor is provided for \link InplaceDecomposition inplace decomposition \endlink when \c MatrixType is a Eigen::Ref.
+      * This overloaded constructor is provided for \link InplaceDecomposition inplace descene \endlink when \c MatrixType is a Eigen::Ref.
       *
       * \sa FullPivLU(const EigenBase&)
       */
     template<typename InputType>
     explicit FullPivLU(EigenBase<InputType>& matrix);
 
-    /** Computes the LU decomposition of the given matrix.
+    /** Computes the LU descene of the given matrix.
       *
-      * \param matrix the matrix of which to compute the LU decomposition.
+      * \param matrix the matrix of which to compute the LU descene.
       *               It is required to be nonzero.
       *
       * \returns a reference to *this
@@ -123,7 +123,7 @@ template<typename _MatrixType> class FullPivLU
       return *this;
     }
 
-    /** \returns the LU decomposition matrix: the upper-triangular part is U, the
+    /** \returns the LU descene matrix: the upper-triangular part is U, the
       * unit-lower-triangular part is L (at least for square matrices; in the non-square
       * case, special care is needed, see the documentation of class FullPivLU).
       *
@@ -135,7 +135,7 @@ template<typename _MatrixType> class FullPivLU
       return m_lu;
     }
 
-    /** \returns the number of nonzero pivots in the LU decomposition.
+    /** \returns the number of nonzero pivots in the LU descene.
       * Here nonzero is meant in the exact sense, not in a fuzzy sense.
       * So that notion isn't really intrinsically interesting, but it is
       * still useful when implementing algorithms.
@@ -196,10 +196,10 @@ template<typename _MatrixType> class FullPivLU
     /** \returns the image of the matrix, also called its column-space. The columns of the returned matrix
       * will form a basis of the image (column-space).
       *
-      * \param originalMatrix the original matrix, of which *this is the LU decomposition.
+      * \param originalMatrix the original matrix, of which *this is the LU descene.
       *                       The reason why it is needed to pass it here, is that this allows
       *                       a large optimization, as otherwise this method would need to reconstruct it
-      *                       from the LU decomposition.
+      *                       from the LU descene.
       *
       * \note If the image has dimension zero, then the returned matrix is a column-vector filled with zeros.
       *
@@ -221,11 +221,11 @@ template<typename _MatrixType> class FullPivLU
 
     #ifdef EIGEN_PARSED_BY_DOXYGEN
     /** \return a solution x to the equation Ax=b, where A is the matrix of which
-      * *this is the LU decomposition.
+      * *this is the LU descene.
       *
       * \param b the right-hand-side of the equation to solve. Can be a vector or a matrix,
       *          the only requirement in order for the equation to make sense is that
-      *          b.rows()==A.rows(), where A is the matrix of which *this is the LU decomposition.
+      *          b.rows()==A.rows(), where A is the matrix of which *this is the LU descene.
       *
       * \returns a solution.
       *
@@ -245,7 +245,7 @@ template<typename _MatrixType> class FullPivLU
     #endif
 
     /** \returns an estimate of the reciprocal condition number of the matrix of which \c *this is
-        the LU decomposition.
+        the LU descene.
       */
     inline RealScalar rcond() const
     {
@@ -254,9 +254,9 @@ template<typename _MatrixType> class FullPivLU
     }
 
     /** \returns the determinant of the matrix of which
-      * *this is the LU decomposition. It has only linear complexity
+      * *this is the LU descene. It has only linear complexity
       * (that is, O(n) where n is the dimension of the square matrix)
-      * as the LU decomposition has already been computed.
+      * as the LU descene has already been computed.
       *
       * \note This is only for square matrices.
       *
@@ -272,7 +272,7 @@ template<typename _MatrixType> class FullPivLU
 
     /** Allows to prescribe a threshold to be used by certain methods, such as rank(),
       * who need to determine when pivots are to be considered nonzero. This is not used for the
-      * LU decomposition itself.
+      * LU descene itself.
       *
       * When it needs to get the threshold value, Eigen calls threshold(). By default, this
       * uses a formula to automatically determine a reasonable threshold.
@@ -321,7 +321,7 @@ template<typename _MatrixType> class FullPivLU
           : NumTraits<Scalar>::epsilon() * RealScalar(m_lu.diagonalSize());
     }
 
-    /** \returns the rank of the matrix of which *this is the LU decomposition.
+    /** \returns the rank of the matrix of which *this is the LU descene.
       *
       * \note This method has to determine which pivots should be considered nonzero.
       *       For that, it uses the threshold value that you can control by calling
@@ -338,7 +338,7 @@ template<typename _MatrixType> class FullPivLU
       return result;
     }
 
-    /** \returns the dimension of the kernel of the matrix of which *this is the LU decomposition.
+    /** \returns the dimension of the kernel of the matrix of which *this is the LU descene.
       *
       * \note This method has to determine which pivots should be considered nonzero.
       *       For that, it uses the threshold value that you can control by calling
@@ -350,7 +350,7 @@ template<typename _MatrixType> class FullPivLU
       return cols() - rank();
     }
 
-    /** \returns true if the matrix of which *this is the LU decomposition represents an injective
+    /** \returns true if the matrix of which *this is the LU descene represents an injective
       *          linear map, i.e. has trivial kernel; false otherwise.
       *
       * \note This method has to determine which pivots should be considered nonzero.
@@ -363,7 +363,7 @@ template<typename _MatrixType> class FullPivLU
       return rank() == cols();
     }
 
-    /** \returns true if the matrix of which *this is the LU decomposition represents a surjective
+    /** \returns true if the matrix of which *this is the LU descene represents a surjective
       *          linear map; false otherwise.
       *
       * \note This method has to determine which pivots should be considered nonzero.
@@ -376,7 +376,7 @@ template<typename _MatrixType> class FullPivLU
       return rank() == rows();
     }
 
-    /** \returns true if the matrix of which *this is the LU decomposition is invertible.
+    /** \returns true if the matrix of which *this is the LU descene is invertible.
       *
       * \note This method has to determine which pivots should be considered nonzero.
       *       For that, it uses the threshold value that you can control by calling
@@ -388,7 +388,7 @@ template<typename _MatrixType> class FullPivLU
       return isInjective() && (m_lu.rows() == m_lu.cols());
     }
 
-    /** \returns the inverse of the matrix of which *this is the LU decomposition.
+    /** \returns the inverse of the matrix of which *this is the LU descene.
       *
       * \note If this matrix is not invertible, the returned matrix has undefined coefficients.
       *       Use isInvertible() to first determine whether this matrix is invertible.
@@ -583,7 +583,7 @@ typename internal::traits<MatrixType>::Scalar FullPivLU<MatrixType>::determinant
   return Scalar(m_det_pq) * Scalar(m_lu.diagonal().prod());
 }
 
-/** \returns the matrix represented by the decomposition,
+/** \returns the matrix represented by the descene,
  * i.e., it returns the product: \f$ P^{-1} L U Q^{-1} \f$.
  * This function is provided for debug purposes. */
 template<typename MatrixType>
@@ -637,7 +637,7 @@ struct kernel_retval<FullPivLU<_MatrixType> >
 
     /* Let us use the following lemma:
       *
-      * Lemma: If the matrix A has the LU decomposition PAQ = LU,
+      * Lemma: If the matrix A has the LU descene PAQ = LU,
       * then Ker A = Q(Ker U).
       *
       * Proof: trivial: just keep in mind that P, Q, L are invertible.
@@ -742,7 +742,7 @@ template<typename _MatrixType>
 template<typename RhsType, typename DstType>
 void FullPivLU<_MatrixType>::_solve_impl(const RhsType &rhs, DstType &dst) const
 {
-  /* The decomposition PAQ = LU can be rewritten as A = P^{-1} L U Q^{-1}.
+  /* The descene PAQ = LU can be rewritten as A = P^{-1} L U Q^{-1}.
   * So we proceed as follows:
   * Step 1: compute c = P * rhs.
   * Step 2: replace c by the solution x to Lx = c. Exists because L is invertible.
@@ -789,7 +789,7 @@ template<typename _MatrixType>
 template<bool Conjugate, typename RhsType, typename DstType>
 void FullPivLU<_MatrixType>::_solve_impl_transposed(const RhsType &rhs, DstType &dst) const
 {
-  /* The decomposition PAQ = LU can be rewritten as A = P^{-1} L U Q^{-1},
+  /* The descene PAQ = LU can be rewritten as A = P^{-1} L U Q^{-1},
    * and since permutations are real and unitary, we can write this
    * as   A^T = Q U^T L^T P,
    * So we proceed as follows:
@@ -859,7 +859,7 @@ struct Assignment<DstXprType, Inverse<FullPivLU<MatrixType> >, internal::assign_
 
 /** \lu_module
   *
-  * \return the full-pivoting LU decomposition of \c *this.
+  * \return the full-pivoting LU descene of \c *this.
   *
   * \sa class FullPivLU
   */

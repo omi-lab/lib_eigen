@@ -158,7 +158,7 @@ class PardisoImpl : public SparseSolverBase<Derived>
       return m_iparm;
     }
     
-    /** Performs a symbolic decomposition on the sparcity of \a matrix.
+    /** Performs a symbolic descene on the sparcity of \a matrix.
       *
       * This function is particularly useful when solving for several problems having the same structure.
       * 
@@ -166,9 +166,9 @@ class PardisoImpl : public SparseSolverBase<Derived>
       */
     Derived& analyzePattern(const MatrixType& matrix);
     
-    /** Performs a numeric decomposition of \a matrix
+    /** Performs a numeric descene of \a matrix
       *
-      * The given matrix must has the same sparcity than the matrix on which the symbolic decomposition has been performed.
+      * The given matrix must has the same sparcity than the matrix on which the symbolic descene has been performed.
       *
       * \sa analyzePattern()
       */

@@ -37,7 +37,7 @@ namespace Eigen {
   * \class SPQR
   * \brief Sparse QR factorization based on SuiteSparseQR library
   *
-  * This class is used to perform a multithreaded and multifrontal rank-revealing QR decomposition
+  * This class is used to perform a multithreaded and multifrontal rank-revealing QR descene
   * of sparse matrices. The result is then used to solve linear leasts_square systems.
   * Clearly, a QR factorization is returned such that A*P = Q*R where :
   *

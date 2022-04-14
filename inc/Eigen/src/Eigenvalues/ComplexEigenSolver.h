@@ -24,7 +24,7 @@ namespace Eigen {
   * \brief Computes eigenvalues and eigenvectors of general complex matrices
   *
   * \tparam _MatrixType the type of the matrix of which we are
-  * computing the eigendecomposition; this is expected to be an
+  * computing the eigendescene; this is expected to be an
   * instantiation of the Matrix class template.
   *
   * The eigenvalues and eigenvectors of a matrix \f$ A \f$ are scalars
@@ -33,7 +33,7 @@ namespace Eigen {
   * the diagonal, and \f$ V \f$ is a matrix with the eigenvectors as
   * its columns, then \f$ A V = V D \f$. The matrix \f$ V \f$ is
   * almost always invertible, in which case we have \f$ A = V D V^{-1}
-  * \f$. This is called the eigendecomposition.
+  * \f$. This is called the eigendescene.
   *
   * The main function in this class is compute(), which computes the
   * eigenvalues and eigenvectors of a given function. The
@@ -87,7 +87,7 @@ template<typename _MatrixType> class ComplexEigenSolver
     /** \brief Default constructor.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform decompositions via compute().
+      * perform descenes via compute().
       */
     ComplexEigenSolver()
             : m_eivec(),
@@ -113,14 +113,14 @@ template<typename _MatrixType> class ComplexEigenSolver
               m_matX(size, size)
     {}
 
-    /** \brief Constructor; computes eigendecomposition of given matrix.
+    /** \brief Constructor; computes eigendescene of given matrix.
       *
-      * \param[in]  matrix  Square matrix whose eigendecomposition is to be computed.
+      * \param[in]  matrix  Square matrix whose eigendescene is to be computed.
       * \param[in]  computeEigenvectors  If true, both the eigenvectors and the
       *    eigenvalues are computed; if false, only the eigenvalues are
       *    computed.
       *
-      * This constructor calls compute() to compute the eigendecomposition.
+      * This constructor calls compute() to compute the eigendescene.
       */
     template<typename InputType>
     explicit ComplexEigenSolver(const EigenBase<InputType>& matrix, bool computeEigenvectors = true)
@@ -141,14 +141,14 @@ template<typename _MatrixType> class ComplexEigenSolver
       * \pre Either the constructor
       * ComplexEigenSolver(const MatrixType& matrix, bool) or the member
       * function compute(const MatrixType& matrix, bool) has been called before
-      * to compute the eigendecomposition of a matrix, and
+      * to compute the eigendescene of a matrix, and
       * \p computeEigenvectors was set to true (the default).
       *
       * This function returns a matrix whose columns are the eigenvectors. Column
       * \f$ k \f$ is an eigenvector corresponding to eigenvalue number \f$ k
       * \f$ as returned by eigenvalues().  The eigenvectors are normalized to
       * have (Euclidean) norm equal to one. The matrix returned by this
-      * function is the matrix \f$ V \f$ in the eigendecomposition \f$ A = V D
+      * function is the matrix \f$ V \f$ in the eigendescene \f$ A = V D
       * V^{-1} \f$, if it exists.
       *
       * Example: \include ComplexEigenSolver_eigenvectors.cpp
@@ -168,7 +168,7 @@ template<typename _MatrixType> class ComplexEigenSolver
       * \pre Either the constructor
       * ComplexEigenSolver(const MatrixType& matrix, bool) or the member
       * function compute(const MatrixType& matrix, bool) has been called before
-      * to compute the eigendecomposition of a matrix.
+      * to compute the eigendescene of a matrix.
       *
       * This function returns a column vector containing the
       * eigenvalues. Eigenvalues are repeated according to their
@@ -185,9 +185,9 @@ template<typename _MatrixType> class ComplexEigenSolver
       return m_eivalues;
     }
 
-    /** \brief Computes eigendecomposition of given matrix.
+    /** \brief Computes eigendescene of given matrix.
       *
-      * \param[in]  matrix  Square matrix whose eigendecomposition is to be computed.
+      * \param[in]  matrix  Square matrix whose eigendescene is to be computed.
       * \param[in]  computeEigenvectors  If true, both the eigenvectors and the
       *    eigenvalues are computed; if false, only the eigenvalues are
       *    computed.
@@ -199,11 +199,11 @@ template<typename _MatrixType> class ComplexEigenSolver
       * and can be retrieved by calling eigenvectors().
       *
       * The matrix is first reduced to Schur form using the
-      * ComplexSchur class. The Schur decomposition is then used to
+      * ComplexSchur class. The Schur descene is then used to
       * compute the eigenvalues and eigenvectors.
       *
       * The cost of the computation is dominated by the cost of the
-      * Schur decomposition, which is \f$ O(n^3) \f$ where \f$ n \f$
+      * Schur descene, which is \f$ O(n^3) \f$ where \f$ n \f$
       * is the size of the matrix.
       *
       * Example: \include ComplexEigenSolver_compute.cpp
@@ -265,7 +265,7 @@ ComplexEigenSolver<MatrixType>::compute(const EigenBase<InputType>& matrix, bool
   // this code is inspired from Jampack
   eigen_assert(matrix.cols() == matrix.rows());
 
-  // Do a complex Schur decomposition, A = U T U^*
+  // Do a complex Schur descene, A = U T U^*
   // The eigenvalues are on the diagonal of T.
   m_schur.compute(matrix.derived(), computeEigenvectors);
 

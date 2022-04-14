@@ -139,7 +139,7 @@ class KLU : public SparseSolverBase<KLU<_MatrixType> >
       return m_q;
     }
 #endif
-    /** Computes the sparse Cholesky decomposition of \a matrix
+    /** Computes the sparse Cholesky descene of \a matrix
      *  Note that the matrix should be column-major, and in compressed format for best performance.
      *  \sa SparseMatrix::makeCompressed().
      */
@@ -153,7 +153,7 @@ class KLU : public SparseSolverBase<KLU<_MatrixType> >
       factorize_impl();
     }
 
-    /** Performs a symbolic decomposition on the sparcity of \a matrix.
+    /** Performs a symbolic descene on the sparcity of \a matrix.
       *
       * This function is particularly useful when solving for several problems having the same structure.
       *
@@ -191,7 +191,7 @@ class KLU : public SparseSolverBase<KLU<_MatrixType> >
       return m_common;
     }
 
-    /** Performs a numeric decomposition of \a matrix
+    /** Performs a numeric descene of \a matrix
       *
       * The given matrix must has the same sparcity than the matrix on which the pattern anylysis has been performed.
       *
@@ -344,7 +344,7 @@ bool KLU<MatrixType>::_solve_impl(const MatrixBase<BDerived> &b, MatrixBase<XDer
 {
   Index rhsCols = b.cols();
   EIGEN_STATIC_ASSERT((XDerived::Flags&RowMajorBit)==0, THIS_METHOD_IS_ONLY_FOR_COLUMN_MAJOR_MATRICES);
-  eigen_assert(m_factorizationIsOk && "The decomposition is not in a valid state for solving, you must first call either compute() or analyzePattern()/factorize()");
+  eigen_assert(m_factorizationIsOk && "The descene is not in a valid state for solving, you must first call either compute() or analyzePattern()/factorize()");
 
   x = b;
   int info = klu_solve(m_symbolic, m_numeric, b.rows(), rhsCols, x.const_cast_derived().data(), const_cast<klu_common*>(&m_common), Scalar());

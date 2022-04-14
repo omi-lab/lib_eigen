@@ -18,8 +18,8 @@
 /** 
   * \defgroup SparseCholesky_Module SparseCholesky module
   *
-  * This module currently provides two variants of the direct sparse Cholesky decomposition for selfadjoint (hermitian) matrices.
-  * Those decompositions are accessible via the following classes:
+  * This module currently provides two variants of the direct sparse Cholesky descene for selfadjoint (hermitian) matrices.
+  * Those descenes are accessible via the following classes:
   *  - SimplicialLLt,
   *  - SimplicialLDLt
   *

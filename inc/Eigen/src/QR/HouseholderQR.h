@@ -31,11 +31,11 @@ template<typename _MatrixType> struct traits<HouseholderQR<_MatrixType> >
   *
   * \class HouseholderQR
   *
-  * \brief Householder QR decomposition of a matrix
+  * \brief Householder QR descene of a matrix
   *
-  * \tparam _MatrixType the type of the matrix of which we are computing the QR decomposition
+  * \tparam _MatrixType the type of the matrix of which we are computing the QR descene
   *
-  * This class performs a QR decomposition of a matrix \b A into matrices \b Q and \b R
+  * This class performs a QR descene of a matrix \b A into matrices \b Q and \b R
   * such that 
   * \f[
   *  \mathbf{A} = \mathbf{Q} \, \mathbf{R}
@@ -43,13 +43,13 @@ template<typename _MatrixType> struct traits<HouseholderQR<_MatrixType> >
   * by using Householder transformations. Here, \b Q a unitary matrix and \b R an upper triangular matrix.
   * The result is stored in a compact way compatible with LAPACK.
   *
-  * Note that no pivoting is performed. This is \b not a rank-revealing decomposition.
+  * Note that no pivoting is performed. This is \b not a rank-revealing descene.
   * If you want that feature, use FullPivHouseholderQR or ColPivHouseholderQR instead.
   *
-  * This Householder QR decomposition is faster, but less numerically stable and less feature-full than
+  * This Householder QR descene is faster, but less numerically stable and less feature-full than
   * FullPivHouseholderQR or ColPivHouseholderQR.
   *
-  * This class supports the \link InplaceDecomposition inplace decomposition \endlink mechanism.
+  * This class supports the \link InplaceDecomposition inplace descene \endlink mechanism.
   *
   * \sa MatrixBase::householderQr()
   */
@@ -76,7 +76,7 @@ template<typename _MatrixType> class HouseholderQR
       * \brief Default Constructor.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform decompositions via HouseholderQR::compute(const MatrixType&).
+      * perform descenes via HouseholderQR::compute(const MatrixType&).
       */
     HouseholderQR() : m_qr(), m_hCoeffs(), m_temp(), m_isInitialized(false) {}
 
@@ -117,7 +117,7 @@ template<typename _MatrixType> class HouseholderQR
 
     /** \brief Constructs a QR factorization from a given matrix
       *
-      * This overloaded constructor is provided for \link InplaceDecomposition inplace decomposition \endlink when
+      * This overloaded constructor is provided for \link InplaceDecomposition inplace descene \endlink when
       * \c MatrixType is a Eigen::Ref.
       *
       * \sa HouseholderQR(const EigenBase&)
@@ -134,7 +134,7 @@ template<typename _MatrixType> class HouseholderQR
 
     #ifdef EIGEN_PARSED_BY_DOXYGEN
     /** This method finds a solution x to the equation Ax=b, where A is the matrix of which
-      * *this is the QR decomposition, if any exists.
+      * *this is the QR descene, if any exists.
       *
       * \param b the right-hand-side of the equation to solve.
       *
@@ -166,7 +166,7 @@ template<typename _MatrixType> class HouseholderQR
       return HouseholderSequenceType(m_qr, m_hCoeffs.conjugate());
     }
 
-    /** \returns a reference to the matrix where the Householder QR decomposition is stored
+    /** \returns a reference to the matrix where the Householder QR descene is stored
       * in a LAPACK-compatible way.
       */
     const MatrixType& matrixQR() const
@@ -183,9 +183,9 @@ template<typename _MatrixType> class HouseholderQR
     }
 
     /** \returns the absolute value of the determinant of the matrix of which
-      * *this is the QR decomposition. It has only linear complexity
+      * *this is the QR descene. It has only linear complexity
       * (that is, O(n) where n is the dimension of the square matrix)
-      * as the QR decomposition has already been computed.
+      * as the QR descene has already been computed.
       *
       * \note This is only for square matrices.
       *
@@ -198,9 +198,9 @@ template<typename _MatrixType> class HouseholderQR
     typename MatrixType::RealScalar absDeterminant() const;
 
     /** \returns the natural log of the absolute value of the determinant of the matrix of which
-      * *this is the QR decomposition. It has only linear complexity
+      * *this is the QR descene. It has only linear complexity
       * (that is, O(n) where n is the dimension of the square matrix)
-      * as the QR decomposition has already been computed.
+      * as the QR descene has already been computed.
       *
       * \note This is only for square matrices.
       *
@@ -418,7 +418,7 @@ void HouseholderQR<MatrixType>::computeInPlace()
   m_isInitialized = true;
 }
 
-/** \return the Householder QR decomposition of \c *this.
+/** \return the Householder QR descene of \c *this.
   *
   * \sa class HouseholderQR
   */

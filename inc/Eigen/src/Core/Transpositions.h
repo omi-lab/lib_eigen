@@ -129,7 +129,7 @@ struct traits<Transpositions<SizeAtCompileTime,MaxSizeAtCompileTime,_StorageInde
   * A transposition applied on the right (e.g., \f$ M T_{i}\f$) yields a column interchange.
   *
   * Compared to the class PermutationMatrix, such a sequence of transpositions is what is
-  * computed during a decomposition with pivoting, and it is faster when applying the permutation in-place.
+  * computed during a descene with pivoting, and it is faster when applying the permutation in-place.
   *
   * To apply a sequence of transpositions to a matrix, simply use the operator * as in the following example:
   * \code

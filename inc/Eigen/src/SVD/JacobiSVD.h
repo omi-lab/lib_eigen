@@ -437,13 +437,13 @@ struct traits<JacobiSVD<_MatrixType,QRPreconditioner> >
   *
   * \class JacobiSVD
   *
-  * \brief Two-sided Jacobi SVD decomposition of a rectangular matrix
+  * \brief Two-sided Jacobi SVD descene of a rectangular matrix
   *
-  * \tparam _MatrixType the type of the matrix of which we are computing the SVD decomposition
-  * \tparam QRPreconditioner this optional parameter allows to specify the type of QR decomposition that will be used internally
+  * \tparam _MatrixType the type of the matrix of which we are computing the SVD descene
+  * \tparam QRPreconditioner this optional parameter allows to specify the type of QR descene that will be used internally
   *                        for the R-SVD step for non-square matrices. See discussion of possible values below.
   *
-  * SVD decomposition consists in decomposing any n-by-p matrix \a A as a product
+  * SVD descene consists in decomposing any n-by-p matrix \a A as a product
   *   \f[ A = U S V^* \f]
   * where \a U is a n-by-n unitary, \a V is a p-by-p unitary, and \a S is a n-by-p real positive matrix which is zero outside of its main diagonal;
   * the diagonal entries of S are known as the \em singular \em values of \a A and the columns of \a U and \a V are known as the left
@@ -451,7 +451,7 @@ struct traits<JacobiSVD<_MatrixType,QRPreconditioner> >
   *
   * Singular values are always sorted in decreasing order.
   *
-  * This JacobiSVD decomposition computes only the singular values by default. If you want \a U or \a V, you need to ask for them explicitly.
+  * This JacobiSVD descene computes only the singular values by default. If you want \a U or \a V, you need to ask for them explicitly.
   *
   * You can ask for only \em thin \a U or \a V to be computed, meaning the following. In case of a rectangular n-by-p matrix, letting \a m be the
   * smaller value among \a n and \a p, there are only \a m singular vectors; the remaining columns of \a U and \a V do not correspond to actual
@@ -462,7 +462,7 @@ struct traits<JacobiSVD<_MatrixType,QRPreconditioner> >
   * \include JacobiSVD_basic.cpp
   * Output: \verbinclude JacobiSVD_basic.out
   *
-  * This JacobiSVD class is a two-sided Jacobi R-SVD decomposition, ensuring optimal reliability and accuracy. The downside is that it's slower than
+  * This JacobiSVD class is a two-sided Jacobi R-SVD descene, ensuring optimal reliability and accuracy. The downside is that it's slower than
   * bidiagonalizing SVD algorithms for large square matrices; however its complexity is still \f$ O(n^2p) \f$ where \a n is the smaller dimension and
   * \a p is the greater dimension, meaning that it is still of the same order of complexity as the faster bidiagonalizing R-SVD algorithms.
   * In particular, like any R-SVD, it takes advantage of non-squareness in that its complexity is only linear in the greater dimension.
@@ -479,7 +479,7 @@ struct traits<JacobiSVD<_MatrixType,QRPreconditioner> >
   *     is inherently non-pivoting). However the resulting SVD is still more reliable than bidiagonalizing SVDs because the Jacobi-based iterarive
   *     process is more reliable than the optimized bidiagonal SVD iterations.
   * \li NoQRPreconditioner allows not to use a QR preconditioner at all. This is useful if you know that you will only be computing
-  *     JacobiSVD decompositions of square matrices. Non-square matrices require a QR preconditioner. Using this option will result in
+  *     JacobiSVD descenes of square matrices. Non-square matrices require a QR preconditioner. Using this option will result in
   *     faster compilation and smaller executable code. It won't significantly speed up computation, since JacobiSVD is always checking
   *     if QR preconditioning is needed before applying it anyway.
   *
@@ -517,7 +517,7 @@ template<typename _MatrixType, int QRPreconditioner> class JacobiSVD
     /** \brief Default Constructor.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform decompositions via JacobiSVD::compute(const MatrixType&).
+      * perform descenes via JacobiSVD::compute(const MatrixType&).
       */
     JacobiSVD()
     {}
@@ -534,7 +534,7 @@ template<typename _MatrixType, int QRPreconditioner> class JacobiSVD
       allocate(rows, cols, computationOptions);
     }
 
-    /** \brief Constructor performing the decomposition of given matrix.
+    /** \brief Constructor performing the descene of given matrix.
      *
      * \param matrix the matrix to decompose
      * \param computationOptions optional parameter allowing to specify if you want full or thin U or V unitaries to be computed.
@@ -549,7 +549,7 @@ template<typename _MatrixType, int QRPreconditioner> class JacobiSVD
       compute(matrix, computationOptions);
     }
 
-    /** \brief Method performing the decomposition of given matrix using custom options.
+    /** \brief Method performing the descene of given matrix using custom options.
      *
      * \param matrix the matrix to decompose
      * \param computationOptions optional parameter allowing to specify if you want full or thin U or V unitaries to be computed.
@@ -561,7 +561,7 @@ template<typename _MatrixType, int QRPreconditioner> class JacobiSVD
      */
     JacobiSVD& compute(const MatrixType& matrix, unsigned int computationOptions);
 
-    /** \brief Method performing the decomposition of given matrix using current options.
+    /** \brief Method performing the descene of given matrix using current options.
      *
      * \param matrix the matrix to decompose
      *
@@ -677,7 +677,7 @@ JacobiSVD<MatrixType, QRPreconditioner>::compute(const MatrixType& matrix, unsig
   RealScalar scale = matrix.cwiseAbs().maxCoeff();
   if(scale==RealScalar(0)) scale = RealScalar(1);
   
-  /*** step 1. The R-SVD step: we use a QR decomposition to reduce to the case of a square matrix */
+  /*** step 1. The R-SVD step: we use a QR descene to reduce to the case of a square matrix */
 
   if(m_rows!=m_cols)
   {
@@ -715,7 +715,7 @@ JacobiSVD<MatrixType, QRPreconditioner>::compute(const MatrixType& matrix, unsig
         if(abs(m_workMatrix.coeff(p,q))>threshold || abs(m_workMatrix.coeff(q,p)) > threshold)
         {
           finished = false;
-          // perform SVD decomposition of 2x2 sub-matrix corresponding to indices p,q to make it diagonal
+          // perform SVD descene of 2x2 sub-matrix corresponding to indices p,q to make it diagonal
           // the complex to real operation returns true if the updated 2x2 block is not already diagonal
           if(internal::svd_precondition_2x2_block_to_be_real<MatrixType, QRPreconditioner>::run(m_workMatrix, *this, p, q, maxDiagEntry))
           {
@@ -788,7 +788,7 @@ JacobiSVD<MatrixType, QRPreconditioner>::compute(const MatrixType& matrix, unsig
 
 /** \svd_module
   *
-  * \return the singular value decomposition of \c *this computed by two-sided
+  * \return the singular value descene of \c *this computed by two-sided
   * Jacobi transformations.
   *
   * \sa class JacobiSVD

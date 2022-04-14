@@ -34,27 +34,27 @@ void tridiagonalization_inplace(MatrixType& matA, CoeffVectorType& hCoeffs);
   *
   * \class Tridiagonalization
   *
-  * \brief Tridiagonal decomposition of a selfadjoint matrix
+  * \brief Tridiagonal descene of a selfadjoint matrix
   *
   * \tparam _MatrixType the type of the matrix of which we are computing the
-  * tridiagonal decomposition; this is expected to be an instantiation of the
+  * tridiagonal descene; this is expected to be an instantiation of the
   * Matrix class template.
   *
-  * This class performs a tridiagonal decomposition of a selfadjoint matrix \f$ A \f$ such that:
+  * This class performs a tridiagonal descene of a selfadjoint matrix \f$ A \f$ such that:
   * \f$ A = Q T Q^* \f$ where \f$ Q \f$ is unitary and \f$ T \f$ a real symmetric tridiagonal matrix.
   *
   * A tridiagonal matrix is a matrix which has nonzero elements only on the
   * main diagonal and the first diagonal below and above it. The Hessenberg
-  * decomposition of a selfadjoint matrix is in fact a tridiagonal
-  * decomposition. This class is used in SelfAdjointEigenSolver to compute the
+  * descene of a selfadjoint matrix is in fact a tridiagonal
+  * descene. This class is used in SelfAdjointEigenSolver to compute the
   * eigenvalues and eigenvectors of a selfadjoint matrix.
   *
-  * Call the function compute() to compute the tridiagonal decomposition of a
+  * Call the function compute() to compute the tridiagonal descene of a
   * given matrix. Alternatively, you can use the Tridiagonalization(const MatrixType&)
-  * constructor which computes the tridiagonal Schur decomposition at
-  * construction time. Once the decomposition is computed, you can use the
+  * constructor which computes the tridiagonal Schur descene at
+  * construction time. Once the descene is computed, you can use the
   * matrixQ() and matrixT() functions to retrieve the matrices Q and T in the
-  * decomposition.
+  * descene.
   *
   * The documentation of Tridiagonalization(const MatrixType&) contains an
   * example of the typical use of this class.
@@ -102,10 +102,10 @@ template<typename _MatrixType> class Tridiagonalization
     /** \brief Default constructor.
       *
       * \param [in]  size  Positive integer, size of the matrix whose tridiagonal
-      * decomposition will be computed.
+      * descene will be computed.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform decompositions via compute().  The \p size parameter is only
+      * perform descenes via compute().  The \p size parameter is only
       * used as a hint. It is not an error to give a wrong \p size, but it may
       * impair performance.
       *
@@ -117,12 +117,12 @@ template<typename _MatrixType> class Tridiagonalization
         m_isInitialized(false)
     {}
 
-    /** \brief Constructor; computes tridiagonal decomposition of given matrix.
+    /** \brief Constructor; computes tridiagonal descene of given matrix.
       *
-      * \param[in]  matrix  Selfadjoint matrix whose tridiagonal decomposition
+      * \param[in]  matrix  Selfadjoint matrix whose tridiagonal descene
       * is to be computed.
       *
-      * This constructor calls compute() to compute the tridiagonal decomposition.
+      * This constructor calls compute() to compute the tridiagonal descene.
       *
       * Example: \include Tridiagonalization_Tridiagonalization_MatrixType.cpp
       * Output: \verbinclude Tridiagonalization_Tridiagonalization_MatrixType.out
@@ -137,13 +137,13 @@ template<typename _MatrixType> class Tridiagonalization
       m_isInitialized = true;
     }
 
-    /** \brief Computes tridiagonal decomposition of given matrix.
+    /** \brief Computes tridiagonal descene of given matrix.
       *
-      * \param[in]  matrix  Selfadjoint matrix whose tridiagonal decomposition
+      * \param[in]  matrix  Selfadjoint matrix whose tridiagonal descene
       * is to be computed.
       * \returns    Reference to \c *this
       *
-      * The tridiagonal decomposition is computed by bringing the columns of
+      * The tridiagonal descene is computed by bringing the columns of
       * the matrix successively in the required form using Householder
       * reflections. The cost is \f$ 4n^3/3 \f$ flops, where \f$ n \f$ denotes
       * the size of the given matrix.
@@ -170,10 +170,10 @@ template<typename _MatrixType> class Tridiagonalization
       *
       * \pre Either the constructor Tridiagonalization(const MatrixType&) or
       * the member function compute(const MatrixType&) has been called before
-      * to compute the tridiagonal decomposition of a matrix.
+      * to compute the tridiagonal descene of a matrix.
       *
       * The Householder coefficients allow the reconstruction of the matrix
-      * \f$ Q \f$ in the tridiagonal decomposition from the packed data.
+      * \f$ Q \f$ in the tridiagonal descene from the packed data.
       *
       * Example: \include Tridiagonalization_householderCoefficients.cpp
       * Output: \verbinclude Tridiagonalization_householderCoefficients.out
@@ -186,14 +186,14 @@ template<typename _MatrixType> class Tridiagonalization
       return m_hCoeffs;
     }
 
-    /** \brief Returns the internal representation of the decomposition
+    /** \brief Returns the internal representation of the descene
       *
       *	\returns a const reference to a matrix with the internal representation
-      *	         of the decomposition.
+      *	         of the descene.
       *
       * \pre Either the constructor Tridiagonalization(const MatrixType&) or
       * the member function compute(const MatrixType&) has been called before
-      * to compute the tridiagonal decomposition of a matrix.
+      * to compute the tridiagonal descene of a matrix.
       *
       * The returned matrix contains the following information:
       *  - the strict upper triangular part is equal to the input matrix A.
@@ -223,13 +223,13 @@ template<typename _MatrixType> class Tridiagonalization
       return m_matrix;
     }
 
-    /** \brief Returns the unitary matrix Q in the decomposition
+    /** \brief Returns the unitary matrix Q in the descene
       *
       * \returns object representing the matrix Q
       *
       * \pre Either the constructor Tridiagonalization(const MatrixType&) or
       * the member function compute(const MatrixType&) has been called before
-      * to compute the tridiagonal decomposition of a matrix.
+      * to compute the tridiagonal descene of a matrix.
       *
       * This function returns a light-weight object of template class
       * HouseholderSequence. You can either apply it directly to a matrix or
@@ -246,13 +246,13 @@ template<typename _MatrixType> class Tridiagonalization
              .setShift(1);
     }
 
-    /** \brief Returns an expression of the tridiagonal matrix T in the decomposition
+    /** \brief Returns an expression of the tridiagonal matrix T in the descene
       *
       * \returns expression object representing the matrix T
       *
       * \pre Either the constructor Tridiagonalization(const MatrixType&) or
       * the member function compute(const MatrixType&) has been called before
-      * to compute the tridiagonal decomposition of a matrix.
+      * to compute the tridiagonal descene of a matrix.
       *
       * Currently, this function can be used to extract the matrix T from internal
       * data and copy it to a dense matrix object. In most cases, it may be
@@ -269,13 +269,13 @@ template<typename _MatrixType> class Tridiagonalization
       return MatrixTReturnType(m_matrix.real());
     }
 
-    /** \brief Returns the diagonal of the tridiagonal matrix T in the decomposition.
+    /** \brief Returns the diagonal of the tridiagonal matrix T in the descene.
       *
       * \returns expression representing the diagonal of T
       *
       * \pre Either the constructor Tridiagonalization(const MatrixType&) or
       * the member function compute(const MatrixType&) has been called before
-      * to compute the tridiagonal decomposition of a matrix.
+      * to compute the tridiagonal descene of a matrix.
       *
       * Example: \include Tridiagonalization_diagonal.cpp
       * Output: \verbinclude Tridiagonalization_diagonal.out
@@ -284,13 +284,13 @@ template<typename _MatrixType> class Tridiagonalization
       */
     DiagonalReturnType diagonal() const;
 
-    /** \brief Returns the subdiagonal of the tridiagonal matrix T in the decomposition.
+    /** \brief Returns the subdiagonal of the tridiagonal matrix T in the descene.
       *
       * \returns expression representing the subdiagonal of T
       *
       * \pre Either the constructor Tridiagonalization(const MatrixType&) or
       * the member function compute(const MatrixType&) has been called before
-      * to compute the tridiagonal decomposition of a matrix.
+      * to compute the tridiagonal descene of a matrix.
       *
       * \sa diagonal() for an example, matrixT()
       */
@@ -322,7 +322,7 @@ Tridiagonalization<MatrixType>::subDiagonal() const
 namespace internal {
 
 /** \internal
-  * Performs a tridiagonal decomposition of the selfadjoint matrix \a matA in-place.
+  * Performs a tridiagonal descene of the selfadjoint matrix \a matA in-place.
   *
   * \param[in,out] matA On input the selfadjoint matrix. Only the \b lower triangular part is referenced.
   *                     On output, the strict upper part is left unchanged, and the lower triangular part
@@ -388,17 +388,17 @@ struct tridiagonalization_inplace_selector;
 /** \brief Performs a full tridiagonalization in place
   *
   * \param[in,out]  mat  On input, the selfadjoint matrix whose tridiagonal
-  *    decomposition is to be computed. Only the lower triangular part referenced.
+  *    descene is to be computed. Only the lower triangular part referenced.
   *    The rest is left unchanged. On output, the orthogonal matrix Q
-  *    in the decomposition if \p extractQ is true.
+  *    in the descene if \p extractQ is true.
   * \param[out]  diag  The diagonal of the tridiagonal matrix T in the
-  *    decomposition.
+  *    descene.
   * \param[out]  subdiag  The subdiagonal of the tridiagonal matrix T in
-  *    the decomposition.
+  *    the descene.
   * \param[in]  extractQ  If true, the orthogonal matrix Q in the
-  *    decomposition is computed and stored in \p mat.
+  *    descene is computed and stored in \p mat.
   *
-  * Computes the tridiagonal decomposition of the selfadjoint matrix \p mat in place
+  * Computes the tridiagonal descene of the selfadjoint matrix \p mat in place
   * such that \f$ mat = Q T Q^* \f$ where \f$ Q \f$ is unitary and \f$ T \f$ a real
   * symmetric tridiagonal matrix.
   *

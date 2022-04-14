@@ -19,10 +19,10 @@
   * 
   * It defines various built-in and external ordering methods for sparse matrices. 
   * They are typically used to reduce the number of elements during 
-  * the sparse matrix decomposition (LLT, LU, QR).
+  * the sparse matrix descene (LLT, LU, QR).
   * Precisely, in a preprocessing step, a permutation matrix P is computed using 
   * those ordering methods and applied to the columns of the matrix. 
-  * Using for instance the sparse Cholesky decomposition, it is expected that 
+  * Using for instance the sparse Cholesky descene, it is expected that 
   * the nonzeros elements in LLT(A*P) will be much smaller than that in LLT(A).
   * 
   * 
@@ -31,7 +31,7 @@
   * #include <Eigen/OrderingMethods>
   * \endcode
   * 
-  * A simple usage is as a template parameter in the sparse decomposition classes : 
+  * A simple usage is as a template parameter in the sparse descene classes : 
   * 
   * \code 
   * SparseLU<MatrixType, COLAMDOrdering<int> > solver;

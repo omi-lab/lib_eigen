@@ -361,14 +361,14 @@ class SuperLUBase : public SparseSolverBase<Derived>
       return m_info;
     }
 
-    /** Computes the sparse Cholesky decomposition of \a matrix */
+    /** Computes the sparse Cholesky descene of \a matrix */
     void compute(const MatrixType& matrix)
     {
       derived().analyzePattern(matrix);
       derived().factorize(matrix);
     }
 
-    /** Performs a symbolic decomposition on the sparcity of \a matrix.
+    /** Performs a symbolic descene on the sparcity of \a matrix.
       *
       * This function is particularly useful when solving for several problems having the same structure.
       * 
@@ -515,7 +515,7 @@ class SuperLU : public SuperLUBase<_MatrixType,SuperLU<_MatrixType> >
     {
     }
     
-    /** Performs a symbolic decomposition on the sparcity of \a matrix.
+    /** Performs a symbolic descene on the sparcity of \a matrix.
       *
       * This function is particularly useful when solving for several problems having the same structure.
       * 
@@ -528,9 +528,9 @@ class SuperLU : public SuperLUBase<_MatrixType,SuperLU<_MatrixType> >
       Base::analyzePattern(matrix);
     }
     
-    /** Performs a numeric decomposition of \a matrix
+    /** Performs a numeric descene of \a matrix
       *
-      * The given matrix must has the same sparcity than the matrix on which the symbolic decomposition has been performed.
+      * The given matrix must has the same sparcity than the matrix on which the symbolic descene has been performed.
       *
       * \sa analyzePattern()
       */
@@ -648,7 +648,7 @@ template<typename MatrixType>
 template<typename Rhs,typename Dest>
 void SuperLU<MatrixType>::_solve_impl(const MatrixBase<Rhs> &b, MatrixBase<Dest>& x) const
 {
-  eigen_assert(m_factorizationIsOk && "The decomposition is not in a valid state for solving, you must first call either compute() or analyzePattern()/factorize()");
+  eigen_assert(m_factorizationIsOk && "The descene is not in a valid state for solving, you must first call either compute() or analyzePattern()/factorize()");
 
   const Index size = m_matrix.rows();
   const Index rhsCols = b.cols();
@@ -706,7 +706,7 @@ void SuperLU<MatrixType>::_solve_impl(const MatrixBase<Rhs> &b, MatrixBase<Dest>
 template<typename MatrixType, typename Derived>
 void SuperLUBase<MatrixType,Derived>::extractData() const
 {
-  eigen_assert(m_factorizationIsOk && "The decomposition is not in a valid state for extracting factors, you must first call either compute() or analyzePattern()/factorize()");
+  eigen_assert(m_factorizationIsOk && "The descene is not in a valid state for extracting factors, you must first call either compute() or analyzePattern()/factorize()");
   if (m_extractedDataAreDirty)
   {
     int         upper;
@@ -792,7 +792,7 @@ void SuperLUBase<MatrixType,Derived>::extractData() const
 template<typename MatrixType>
 typename SuperLU<MatrixType>::Scalar SuperLU<MatrixType>::determinant() const
 {
-  eigen_assert(m_factorizationIsOk && "The decomposition is not in a valid state for computing the determinant, you must first call either compute() or analyzePattern()/factorize()");
+  eigen_assert(m_factorizationIsOk && "The descene is not in a valid state for computing the determinant, you must first call either compute() or analyzePattern()/factorize()");
   
   if (m_extractedDataAreDirty)
     this->extractData();
@@ -862,7 +862,7 @@ class SuperILU : public SuperLUBase<_MatrixType,SuperILU<_MatrixType> >
     {
     }
     
-    /** Performs a symbolic decomposition on the sparcity of \a matrix.
+    /** Performs a symbolic descene on the sparcity of \a matrix.
       *
       * This function is particularly useful when solving for several problems having the same structure.
       * 
@@ -873,9 +873,9 @@ class SuperILU : public SuperLUBase<_MatrixType,SuperILU<_MatrixType> >
       Base::analyzePattern(matrix);
     }
     
-    /** Performs a numeric decomposition of \a matrix
+    /** Performs a numeric descene of \a matrix
       *
-      * The given matrix must has the same sparcity than the matrix on which the symbolic decomposition has been performed.
+      * The given matrix must has the same sparcity than the matrix on which the symbolic descene has been performed.
       *
       * \sa analyzePattern()
       */
@@ -972,7 +972,7 @@ template<typename MatrixType>
 template<typename Rhs,typename Dest>
 void SuperILU<MatrixType>::_solve_impl(const MatrixBase<Rhs> &b, MatrixBase<Dest>& x) const
 {
-  eigen_assert(m_factorizationIsOk && "The decomposition is not in a valid state for solving, you must first call either compute() or analyzePattern()/factorize()");
+  eigen_assert(m_factorizationIsOk && "The descene is not in a valid state for solving, you must first call either compute() or analyzePattern()/factorize()");
 
   const int size = m_matrix.rows();
   const int rhsCols = b.cols();

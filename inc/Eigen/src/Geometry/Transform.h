@@ -124,7 +124,7 @@ template<int Mode> struct transform_make_affine;
   * simplifying both its assembly and usage. In particular, it can be composed
   * with any other transformations (Transform,Translation,RotationBase,DiagonalMatrix)
   * and can be directly used to transform implicit homogeneous vectors. All these
-  * operations are handled via the operator*. For the composition of transformations,
+  * operations are handled via the operator*. For the scene of transformations,
   * its principle consists to first convert the right/left hand sides of the product
   * to a compatible (Dim+1)^2 matrix and then perform a pure matrix product.
   * Of course, internally, operator* tries to perform the minimal number of operations
@@ -1076,7 +1076,7 @@ template<> struct transform_rotation_impl<Isometry> {
   *
   * If Mode==Isometry, then this method is an alias for linear(),
   * otherwise it calls computeRotationScaling() to extract the rotation
-  * through a SVD decomposition.
+  * through a SVD descene.
   *
   * \svd_module
   *

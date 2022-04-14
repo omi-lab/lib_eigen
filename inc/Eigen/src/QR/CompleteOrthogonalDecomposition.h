@@ -28,11 +28,11 @@ struct traits<CompleteOrthogonalDecomposition<_MatrixType> >
   *
   * \class CompleteOrthogonalDecomposition
   *
-  * \brief Complete orthogonal decomposition (COD) of a matrix.
+  * \brief Complete orthogonal descene (COD) of a matrix.
   *
   * \param MatrixType the type of the matrix of which we are computing the COD.
   *
-  * This class performs a rank-revealing complete orthogonal decomposition of a
+  * This class performs a rank-revealing complete orthogonal descene of a
   * matrix  \b A into matrices \b P, \b Q, \b T, and \b Z such that
   * \f[
   *  \mathbf{A} \, \mathbf{P} = \mathbf{Q} \,
@@ -43,7 +43,7 @@ struct traits<CompleteOrthogonalDecomposition<_MatrixType> >
   * \b Q and \b Z are unitary matrices and \b T an upper triangular matrix of
   * size rank-by-rank. \b A may be rank deficient.
   *
-  * This class supports the \link InplaceDecomposition inplace decomposition \endlink mechanism.
+  * This class supports the \link InplaceDecomposition inplace descene \endlink mechanism.
   * 
   * \sa MatrixBase::completeOrthogonalDecomposition()
   */
@@ -84,7 +84,7 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
    * \brief Default Constructor.
    *
    * The default constructor is useful in cases in which the user intends to
-   * perform decompositions via
+   * perform descenes via
    * \c CompleteOrthogonalDecomposition::compute(const* MatrixType&).
    */
   CompleteOrthogonalDecomposition() : m_cpqr(), m_zCoeffs(), m_temp() {}
@@ -98,10 +98,10 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
   CompleteOrthogonalDecomposition(Index rows, Index cols)
       : m_cpqr(rows, cols), m_zCoeffs((std::min)(rows, cols)), m_temp(cols) {}
 
-  /** \brief Constructs a complete orthogonal decomposition from a given
+  /** \brief Constructs a complete orthogonal descene from a given
    * matrix.
    *
-   * This constructor computes the complete orthogonal decomposition of the
+   * This constructor computes the complete orthogonal descene of the
    * matrix \a matrix by calling the method compute(). The default
    * threshold for rank determination will be used. It is a short cut for:
    *
@@ -123,9 +123,9 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
     compute(matrix.derived());
   }
 
-  /** \brief Constructs a complete orthogonal decomposition from a given matrix
+  /** \brief Constructs a complete orthogonal descene from a given matrix
     *
-    * This overloaded constructor is provided for \link InplaceDecomposition inplace decomposition \endlink when \c MatrixType is a Eigen::Ref.
+    * This overloaded constructor is provided for \link InplaceDecomposition inplace descene \endlink when \c MatrixType is a Eigen::Ref.
     *
     * \sa CompleteOrthogonalDecomposition(const EigenBase&)
     */
@@ -141,7 +141,7 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
   #ifdef EIGEN_PARSED_BY_DOXYGEN
   /** This method computes the minimum-norm solution X to a least squares
    * problem \f[\mathrm{minimize} \|A X - B\|, \f] where \b A is the matrix of
-   * which \c *this is the complete orthogonal decomposition.
+   * which \c *this is the complete orthogonal descene.
    *
    * \param b the right-hand sides of the problem to solve.
    *
@@ -165,12 +165,12 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
   }
 
   /** \returns a reference to the matrix where the complete orthogonal
-   * decomposition is stored
+   * descene is stored
    */
   const MatrixType& matrixQTZ() const { return m_cpqr.matrixQR(); }
 
   /** \returns a reference to the matrix where the complete orthogonal
-   * decomposition is stored.
+   * descene is stored.
    * \warning The strict lower part and \code cols() - rank() \endcode right
    * columns of this matrix contains internal values.
    * Only the upper triangular part should be referenced. To get it, use
@@ -196,9 +196,9 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
   }
 
   /** \returns the absolute value of the determinant of the matrix of which
-   * *this is the complete orthogonal decomposition. It has only linear
+   * *this is the complete orthogonal descene. It has only linear
    * complexity (that is, O(n) where n is the dimension of the square matrix)
-   * as the complete orthogonal decomposition has already been computed.
+   * as the complete orthogonal descene has already been computed.
    *
    * \note This is only for square matrices.
    *
@@ -211,9 +211,9 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
   typename MatrixType::RealScalar absDeterminant() const;
 
   /** \returns the natural log of the absolute value of the determinant of the
-   * matrix of which *this is the complete orthogonal decomposition. It has
+   * matrix of which *this is the complete orthogonal descene. It has
    * only linear complexity (that is, O(n) where n is the dimension of the
-   * square matrix) as the complete orthogonal decomposition has already been
+   * square matrix) as the complete orthogonal descene has already been
    * computed.
    *
    * \note This is only for square matrices.
@@ -226,7 +226,7 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
   typename MatrixType::RealScalar logAbsDeterminant() const;
 
   /** \returns the rank of the matrix of which *this is the complete orthogonal
-   * decomposition.
+   * descene.
    *
    * \note This method has to determine which pivots should be considered
    * nonzero. For that, it uses the threshold value that you can control by
@@ -235,7 +235,7 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
   inline Index rank() const { return m_cpqr.rank(); }
 
   /** \returns the dimension of the kernel of the matrix of which *this is the
-   * complete orthogonal decomposition.
+   * complete orthogonal descene.
    *
    * \note This method has to determine which pivots should be considered
    * nonzero. For that, it uses the threshold value that you can control by
@@ -243,7 +243,7 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
    */
   inline Index dimensionOfKernel() const { return m_cpqr.dimensionOfKernel(); }
 
-  /** \returns true if the matrix of which *this is the decomposition represents
+  /** \returns true if the matrix of which *this is the descene represents
    * an injective linear map, i.e. has trivial kernel; false otherwise.
    *
    * \note This method has to determine which pivots should be considered
@@ -252,7 +252,7 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
    */
   inline bool isInjective() const { return m_cpqr.isInjective(); }
 
-  /** \returns true if the matrix of which *this is the decomposition represents
+  /** \returns true if the matrix of which *this is the descene represents
    * a surjective linear map; false otherwise.
    *
    * \note This method has to determine which pivots should be considered
@@ -262,7 +262,7 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
   inline bool isSurjective() const { return m_cpqr.isSurjective(); }
 
   /** \returns true if the matrix of which *this is the complete orthogonal
-   * decomposition is invertible.
+   * descene is invertible.
    *
    * \note This method has to determine which pivots should be considered
    * nonzero. For that, it uses the threshold value that you can control by
@@ -271,7 +271,7 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
   inline bool isInvertible() const { return m_cpqr.isInvertible(); }
 
   /** \returns the pseudo-inverse of the matrix of which *this is the complete
-   * orthogonal decomposition.
+   * orthogonal descene.
    * \warning: Do not compute \c this->pseudoInverse()*rhs to solve a linear systems.
    * It is more efficient and numerically stable to call \c this->solve(rhs).
    */
@@ -342,7 +342,7 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
   RealScalar threshold() const { return m_cpqr.threshold(); }
 
   /** \returns the number of nonzero pivots in the complete orthogonal
-   * decomposition. Here nonzero is meant in the exact sense, not in a
+   * descene. Here nonzero is meant in the exact sense, not in a
    * fuzzy sense. So that notion isn't really intrinsically interesting,
    * but it is still useful when implementing algorithms.
    *
@@ -355,7 +355,7 @@ template <typename _MatrixType> class CompleteOrthogonalDecomposition
    */
   inline RealScalar maxPivot() const { return m_cpqr.maxPivot(); }
 
-  /** \brief Reports whether the complete orthogonal decomposition was
+  /** \brief Reports whether the complete orthogonal descene was
    * successful.
    *
    * \note This function always returns \c Success. It is provided for
@@ -419,7 +419,7 @@ CompleteOrthogonalDecomposition<MatrixType>::logAbsDeterminant() const {
   return m_cpqr.logAbsDeterminant();
 }
 
-/** Performs the complete orthogonal decomposition of the given matrix \a
+/** Performs the complete orthogonal descene of the given matrix \a
  * matrix. The result of the factorization is stored into \c *this, and a
  * reference to \c *this is returned.
  *
@@ -446,7 +446,7 @@ void CompleteOrthogonalDecomposition<MatrixType>::computeInPlace()
     //   [ 0  R22]
     // where R11 is r-by-r (r = rank) upper triangular, R12 is
     // r-by-(n-r), and R22 is empty or the norm of R22 is negligible.
-    // We now compute the complete orthogonal decomposition by applying
+    // We now compute the complete orthogonal descene by applying
     // Householder transformations from the right to the upper trapezoidal
     // matrix X = [R11 R12] to zero out R12 and obtain the factorization
     // [R11 R12] = [T11 0] * Z, where T11 is r-by-r upper triangular and
@@ -620,7 +620,7 @@ CompleteOrthogonalDecomposition<MatrixType>::householderQ() const {
   return m_cpqr.householderQ();
 }
 
-/** \return the complete orthogonal decomposition of \c *this.
+/** \return the complete orthogonal descene of \c *this.
   *
   * \sa class CompleteOrthogonalDecomposition
   */

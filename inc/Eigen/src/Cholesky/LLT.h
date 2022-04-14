@@ -30,22 +30,22 @@ template<typename MatrixType, int UpLo> struct LLT_Traits;
   *
   * \class LLT
   *
-  * \brief Standard Cholesky decomposition (LL^T) of a matrix and associated features
+  * \brief Standard Cholesky descene (LL^T) of a matrix and associated features
   *
-  * \tparam _MatrixType the type of the matrix of which we are computing the LL^T Cholesky decomposition
+  * \tparam _MatrixType the type of the matrix of which we are computing the LL^T Cholesky descene
   * \tparam _UpLo the triangular part that will be used for the decompositon: Lower (default) or Upper.
   *               The other triangular part won't be read.
   *
-  * This class performs a LL^T Cholesky decomposition of a symmetric, positive definite
+  * This class performs a LL^T Cholesky descene of a symmetric, positive definite
   * matrix A such that A = LL^* = U^*U, where L is lower triangular.
   *
-  * While the Cholesky decomposition is particularly useful to solve selfadjoint problems like  D^*D x = b,
-  * for that purpose, we recommend the Cholesky decomposition without square root which is more stable
-  * and even faster. Nevertheless, this standard Cholesky decomposition remains useful in many other
+  * While the Cholesky descene is particularly useful to solve selfadjoint problems like  D^*D x = b,
+  * for that purpose, we recommend the Cholesky descene without square root which is more stable
+  * and even faster. Nevertheless, this standard Cholesky descene remains useful in many other
   * situations like generalised eigen problems with hermitian matrices.
   *
-  * Remember that Cholesky decompositions are not rank-revealing. This LLT decomposition is only stable on positive definite matrices,
-  * use LDLT instead for the semidefinite case. Also, do not use a Cholesky decomposition to determine whether a system of equations
+  * Remember that Cholesky descenes are not rank-revealing. This LLT descene is only stable on positive definite matrices,
+  * use LDLT instead for the semidefinite case. Also, do not use a Cholesky descene to determine whether a system of equations
   * has a solution.
   *
   * Example: \include LLT_example.cpp
@@ -56,9 +56,9 @@ template<typename MatrixType, int UpLo> struct LLT_Traits;
   * with the Upper triangular part. Otherwise, you might get a 20% slowdown for the full factorization
   * step, and rank-updates can be up to 3 times slower.
   *
-  * This class supports the \link InplaceDecomposition inplace decomposition \endlink mechanism.
+  * This class supports the \link InplaceDecomposition inplace descene \endlink mechanism.
   *
-  * Note that during the decomposition, only the lower (or upper, as defined by _UpLo) triangular part of A is considered.
+  * Note that during the descene, only the lower (or upper, as defined by _UpLo) triangular part of A is considered.
   * Therefore, the strict lower part does not have to store correct values.
   *
   * \sa MatrixBase::llt(), SelfAdjointView::llt(), class LDLT
@@ -88,7 +88,7 @@ template<typename _MatrixType, int _UpLo> class LLT
       * \brief Default Constructor.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform decompositions via LLT::compute(const MatrixType&).
+      * perform descenes via LLT::compute(const MatrixType&).
       */
     LLT() : m_matrix(), m_isInitialized(false) {}
 
@@ -111,7 +111,7 @@ template<typename _MatrixType, int _UpLo> class LLT
 
     /** \brief Constructs a LLT factorization from a given matrix
       *
-      * This overloaded constructor is provided for \link InplaceDecomposition inplace decomposition \endlink when
+      * This overloaded constructor is provided for \link InplaceDecomposition inplace descene \endlink when
       * \c MatrixType is a Eigen::Ref.
       *
       * \sa LLT(const EigenBase&)
@@ -139,7 +139,7 @@ template<typename _MatrixType, int _UpLo> class LLT
     }
 
     #ifdef EIGEN_PARSED_BY_DOXYGEN
-    /** \returns the solution x of \f$ A x = b \f$ using the current decomposition of A.
+    /** \returns the solution x of \f$ A x = b \f$ using the current descene of A.
       *
       * Since this LLT class assumes anyway that the matrix A is invertible, the solution
       * theoretically exists and is unique regardless of b.
@@ -161,7 +161,7 @@ template<typename _MatrixType, int _UpLo> class LLT
     LLT& compute(const EigenBase<InputType>& matrix);
 
     /** \returns an estimate of the reciprocal condition number of the matrix of
-      *  which \c *this is the Cholesky decomposition.
+      *  which \c *this is the Cholesky descene.
       */
     RealScalar rcond() const
     {
@@ -170,7 +170,7 @@ template<typename _MatrixType, int _UpLo> class LLT
       return internal::rcond_estimate_helper(m_l1_norm, *this);
     }
 
-    /** \returns the LLT decomposition matrix
+    /** \returns the LLT descene matrix
       *
       * TODO: document the storage layout
       */
@@ -194,10 +194,10 @@ template<typename _MatrixType, int _UpLo> class LLT
       return m_info;
     }
 
-    /** \returns the adjoint of \c *this, that is, a const reference to the decomposition itself as the underlying matrix is self-adjoint.
+    /** \returns the adjoint of \c *this, that is, a const reference to the descene itself as the underlying matrix is self-adjoint.
       *
-      * This method is provided for compatibility with other matrix decompositions, thus enabling generic code such as:
-      * \code x = decomposition.adjoint().solve(b) \endcode
+      * This method is provided for compatibility with other matrix descenes, thus enabling generic code such as:
+      * \code x = descene.adjoint().solve(b) \endcode
       */
     const LLT& adjoint() const { return *this; };
 
@@ -404,7 +404,7 @@ template<typename MatrixType> struct LLT_Traits<MatrixType,Lower>
   typedef const TriangularView<const typename MatrixType::AdjointReturnType, Upper> MatrixU;
   static inline MatrixL getL(const MatrixType& m) { return MatrixL(m); }
   static inline MatrixU getU(const MatrixType& m) { return MatrixU(m.adjoint()); }
-  static bool inplace_decomposition(MatrixType& m)
+  static bool inplace_descene(MatrixType& m)
   { return llt_inplace<typename MatrixType::Scalar, Lower>::blocked(m)==-1; }
 };
 
@@ -414,13 +414,13 @@ template<typename MatrixType> struct LLT_Traits<MatrixType,Upper>
   typedef const TriangularView<const MatrixType, Upper> MatrixU;
   static inline MatrixL getL(const MatrixType& m) { return MatrixL(m.adjoint()); }
   static inline MatrixU getU(const MatrixType& m) { return MatrixU(m); }
-  static bool inplace_decomposition(MatrixType& m)
+  static bool inplace_descene(MatrixType& m)
   { return llt_inplace<typename MatrixType::Scalar, Upper>::blocked(m)==-1; }
 };
 
 } // end namespace internal
 
-/** Computes / recomputes the Cholesky decomposition A = LL^* = U^*U of \a matrix
+/** Computes / recomputes the Cholesky descene A = LL^* = U^*U of \a matrix
   *
   * \returns a reference to *this
   *
@@ -453,13 +453,13 @@ LLT<MatrixType,_UpLo>& LLT<MatrixType,_UpLo>::compute(const EigenBase<InputType>
   }
 
   m_isInitialized = true;
-  bool ok = Traits::inplace_decomposition(m_matrix);
+  bool ok = Traits::inplace_descene(m_matrix);
   m_info = ok ? Success : NumericalIssue;
 
   return *this;
 }
 
-/** Performs a rank one update (or dowdate) of the current decomposition.
+/** Performs a rank one update (or dowdate) of the current descene.
   * If A = LL^* before the rank one update,
   * then after it we have LL^* = A + sigma * v v^* where \a v must be a vector
   * of same dimension.
@@ -521,7 +521,7 @@ void LLT<MatrixType,_UpLo>::solveInPlace(const MatrixBase<Derived> &bAndX) const
   matrixU().solveInPlace(bAndX);
 }
 
-/** \returns the matrix represented by the decomposition,
+/** \returns the matrix represented by the descene,
  * i.e., it returns the product: L L^*.
  * This function is provided for debug purpose. */
 template<typename MatrixType, int _UpLo>
@@ -532,7 +532,7 @@ MatrixType LLT<MatrixType,_UpLo>::reconstructedMatrix() const
 }
 
 /** \cholesky_module
-  * \returns the LLT decomposition of \c *this
+  * \returns the LLT descene of \c *this
   * \sa SelfAdjointView::llt()
   */
 template<typename Derived>
@@ -543,7 +543,7 @@ MatrixBase<Derived>::llt() const
 }
 
 /** \cholesky_module
-  * \returns the LLT decomposition of \c *this
+  * \returns the LLT descene of \c *this
   * \sa SelfAdjointView::llt()
   */
 template<typename MatrixType, unsigned int UpLo>

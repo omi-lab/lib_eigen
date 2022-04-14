@@ -34,7 +34,7 @@ ComputationInfo computeFromTridiagonal_impl(DiagType& diag, SubDiagType& subdiag
   * \brief Computes eigenvalues and eigenvectors of selfadjoint matrices
   *
   * \tparam _MatrixType the type of the matrix of which we are computing the
-  * eigendecomposition; this is expected to be an instantiation of the Matrix
+  * eigendescene; this is expected to be an instantiation of the Matrix
   * class template.
   *
   * A matrix \f$ A \f$ is selfadjoint if it equals its adjoint. For real
@@ -46,7 +46,7 @@ ComputationInfo computeFromTridiagonal_impl(DiagType& diag, SubDiagType& subdiag
   * the eigenvalues on the diagonal, and \f$ V \f$ is a matrix with the
   * eigenvectors as its columns, then \f$ A = V D V^{-1} \f$ (for selfadjoint
   * matrices, the matrix \f$ V \f$ is always invertible). This is called the
-  * eigendecomposition.
+  * eigendescene.
   *
   * The algorithm exploits the fact that the matrix is selfadjoint, making it
   * faster and more accurate than the general purpose eigenvalue algorithms
@@ -109,7 +109,7 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
     /** \brief Default constructor for fixed-size matrices.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform decompositions via compute(). This constructor
+      * perform descenes via compute(). This constructor
       * can only be used if \p _MatrixType is a fixed-size matrix; use
       * SelfAdjointEigenSolver(Index) for dynamic-size matrices.
       *
@@ -132,7 +132,7 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
       * eigenvalues and eigenvectors will be computed.
       *
       * This constructor is useful for dynamic-size matrices, when the user
-      * intends to perform decompositions via compute(). The \p size
+      * intends to perform descenes via compute(). The \p size
       * parameter is only used as a hint. It is not an error to give a wrong
       * \p size, but it may impair performance.
       *
@@ -147,9 +147,9 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
           m_eigenvectorsOk(false)
     {}
 
-    /** \brief Constructor; computes eigendecomposition of given matrix.
+    /** \brief Constructor; computes eigendescene of given matrix.
       *
-      * \param[in]  matrix  Selfadjoint matrix whose eigendecomposition is to
+      * \param[in]  matrix  Selfadjoint matrix whose eigendescene is to
       *    be computed. Only the lower triangular part of the matrix is referenced.
       * \param[in]  options Can be #ComputeEigenvectors (default) or #EigenvaluesOnly.
       *
@@ -174,9 +174,9 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
       compute(matrix.derived(), options);
     }
 
-    /** \brief Computes eigendecomposition of given matrix.
+    /** \brief Computes eigendescene of given matrix.
       *
-      * \param[in]  matrix  Selfadjoint matrix whose eigendecomposition is to
+      * \param[in]  matrix  Selfadjoint matrix whose eigendescene is to
       *    be computed. Only the lower triangular part of the matrix is referenced.
       * \param[in]  options Can be #ComputeEigenvectors (default) or #EigenvaluesOnly.
       * \returns    Reference to \c *this
@@ -208,7 +208,7 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
     EIGEN_DEVICE_FUNC
     SelfAdjointEigenSolver& compute(const EigenBase<InputType>& matrix, int options = ComputeEigenvectors);
     
-    /** \brief Computes eigendecomposition of given matrix using a closed-form algorithm
+    /** \brief Computes eigendescene of given matrix using a closed-form algorithm
       *
       * This is a variant of compute(const MatrixType&, int options) which
       * directly solves the underlying polynomial equation.
@@ -230,7 +230,7 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
     SelfAdjointEigenSolver& computeDirect(const MatrixType& matrix, int options = ComputeEigenvectors);
 
     /**
-      *\brief Computes the eigen decomposition from a tridiagonal symmetric matrix
+      *\brief Computes the eigen descene from a tridiagonal symmetric matrix
       *
       * \param[in] diag The vector containing the diagonal of the matrix.
       * \param[in] subdiag The subdiagonal of the matrix.
@@ -254,7 +254,7 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
       * eigenvectors are normalized to have (Euclidean) norm equal to one. If
       * this object was used to solve the eigenproblem for the selfadjoint
       * matrix \f$ A \f$, then the matrix returned by this function is the
-      * matrix \f$ V \f$ in the eigendecomposition \f$ A = V D V^{-1} \f$.
+      * matrix \f$ V \f$ in the eigendescene \f$ A = V D V^{-1} \f$.
       *
       * Example: \include SelfAdjointEigenSolver_eigenvectors.cpp
       * Output: \verbinclude SelfAdjointEigenSolver_eigenvectors.out
@@ -300,7 +300,7 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
       *
       * The square root of a positive-definite matrix \f$ A \f$ is the
       * positive-definite matrix whose square equals \f$ A \f$. This function
-      * uses the eigendecomposition \f$ A = V D V^{-1} \f$ to compute the
+      * uses the eigendescene \f$ A = V D V^{-1} \f$ to compute the
       * square root as \f$ A^{1/2} = V D^{1/2} V^{-1} \f$.
       *
       * Example: \include SelfAdjointEigenSolver_operatorSqrt.cpp
@@ -323,7 +323,7 @@ template<typename _MatrixType> class SelfAdjointEigenSolver
       * \pre The eigenvalues and eigenvectors of a positive-definite matrix
       * have been computed before.
       *
-      * This function uses the eigendecomposition \f$ A = V D V^{-1} \f$ to
+      * This function uses the eigendescene \f$ A = V D V^{-1} \f$ to
       * compute the inverse square root as \f$ V D^{-1/2} V^{-1} \f$. This is
       * cheaper than first computing the square root with operatorSqrt() and
       * then its inverse with MatrixBase::inverse().
@@ -476,10 +476,10 @@ SelfAdjointEigenSolver<MatrixType>& SelfAdjointEigenSolver<MatrixType>
 namespace internal {
 /**
   * \internal
-  * \brief Compute the eigendecomposition from a tridiagonal matrix
+  * \brief Compute the eigendescene from a tridiagonal matrix
   *
   * \param[in,out] diag : On input, the diagonal of the matrix, on output the eigenvalues
-  * \param[in,out] subdiag : The subdiagonal part of the matrix (entries are modified during the decomposition)
+  * \param[in,out] subdiag : The subdiagonal part of the matrix (entries are modified during the descene)
   * \param[in] maxIterations : the maximum number of iterations
   * \param[in] computeEigenvectors : whether the eigenvectors have to be computed or not
   * \param[out] eivec : The matrix to store the eigenvectors if computeEigenvectors==true. Must be allocated on input.
@@ -716,7 +716,7 @@ template<typename SolverType> struct direct_selfadjoint_eigenvalues<SolverType,3
   }
 };
 
-// 2x2 direct eigenvalues decomposition, code from Hauke Heibel
+// 2x2 direct eigenvalues descene, code from Hauke Heibel
 template<typename SolverType> 
 struct direct_selfadjoint_eigenvalues<SolverType,2,false>
 {

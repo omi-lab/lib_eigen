@@ -370,7 +370,7 @@ class UmfPackLU : public SparseSolverBase<UmfPackLU<_MatrixType> >
       return m_q;
     }
 
-    /** Computes the sparse Cholesky decomposition of \a matrix
+    /** Computes the sparse Cholesky descene of \a matrix
      *  Note that the matrix should be column-major, and in compressed format for best performance.
      *  \sa SparseMatrix::makeCompressed().
      */
@@ -384,7 +384,7 @@ class UmfPackLU : public SparseSolverBase<UmfPackLU<_MatrixType> >
       factorize_impl();
     }
 
-    /** Performs a symbolic decomposition on the sparcity of \a matrix.
+    /** Performs a symbolic descene on the sparcity of \a matrix.
       *
       * This function is particularly useful when solving for several problems having the same structure.
       *
@@ -434,7 +434,7 @@ class UmfPackLU : public SparseSolverBase<UmfPackLU<_MatrixType> >
       return m_control;
     }
 
-    /** Performs a numeric decomposition of \a matrix
+    /** Performs a numeric descene of \a matrix
       *
       * The given matrix must has the same sparcity than the matrix on which the pattern anylysis has been performed.
       *

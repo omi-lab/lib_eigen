@@ -181,7 +181,7 @@ class SparseLU : public SparseSolverBase<SparseLU<_MatrixType,_OrderingType> >, 
     }
 
 #ifdef EIGEN_PARSED_BY_DOXYGEN
-    /** \returns the solution X of \f$ A X = B \f$ using the current decomposition of A.
+    /** \returns the solution X of \f$ A X = B \f$ using the current descene of A.
       *
       * \warning the destination matrix X in X = this->solve(B) must be colmun-major.
       *
@@ -242,7 +242,7 @@ class SparseLU : public SparseSolverBase<SparseLU<_MatrixType,_OrderingType> >, 
     
     /**
       * \returns the absolute value of the determinant of the matrix of which
-      * *this is the QR decomposition.
+      * *this is the QR descene.
       *
       * \warning a determinant can be very big or small, so for matrices
       * of large enough dimension, there is a risk of overflow/underflow.
@@ -273,7 +273,7 @@ class SparseLU : public SparseSolverBase<SparseLU<_MatrixType,_OrderingType> >, 
     }
 
     /** \returns the natural log of the absolute value of the determinant of the matrix
-      * of which **this is the QR decomposition
+      * of which **this is the QR descene
       *
       * \note This method is useful to work around the risk of overflow/underflow that's
       * inherent to the determinant computation.

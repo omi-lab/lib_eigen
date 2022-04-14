@@ -46,11 +46,11 @@ struct solve_assertion<CwiseUnaryOp<Eigen::internal::scalar_conjugate_op<Scalar>
 } // end namespace internal
 
 /** \class SolverBase
-  * \brief A base class for matrix decomposition and solvers
+  * \brief A base class for matrix descene and solvers
   *
-  * \tparam Derived the actual type of the decomposition/solver.
+  * \tparam Derived the actual type of the descene/solver.
   *
-  * Any matrix decomposition inheriting this base class provide the following API:
+  * Any matrix descene inheriting this base class provide the following API:
   *
   * \code
   * MatrixType A, b, x;
@@ -99,7 +99,7 @@ class SolverBase : public EigenBase<Derived>
 
     using Base::derived;
 
-    /** \returns an expression of the solution x of \f$ A x = b \f$ using the current decomposition of A.
+    /** \returns an expression of the solution x of \f$ A x = b \f$ using the current descene of A.
       */
     template<typename Rhs>
     inline const Solve<Derived, Rhs>

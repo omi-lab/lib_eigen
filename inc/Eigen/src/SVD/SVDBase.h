@@ -36,9 +36,9 @@ template<typename Derived> struct traits<SVDBase<Derived> >
  *
  * \brief Base class of SVD algorithms
  *
- * \tparam Derived the type of the actual SVD decomposition
+ * \tparam Derived the type of the actual SVD descene
  *
- * SVD decomposition consists in decomposing any n-by-p matrix \a A as a product
+ * SVD descene consists in decomposing any n-by-p matrix \a A as a product
  *   \f[ A = U S V^* \f]
  * where \a U is a n-by-n unitary, \a V is a p-by-p unitary, and \a S is a n-by-p real positive matrix which is zero outside of its main diagonal;
  * the diagonal entries of S are known as the \em singular \em values of \a A and the columns of \a U and \a V are known as the left
@@ -88,7 +88,7 @@ public:
 
   /** \returns the \a U matrix.
    *
-   * For the SVD decomposition of a n-by-p matrix, letting \a m be the minimum of \a n and \a p,
+   * For the SVD descene of a n-by-p matrix, letting \a m be the minimum of \a n and \a p,
    * the U matrix is n-by-n if you asked for \link Eigen::ComputeFullU ComputeFullU \endlink, and is n-by-m if you asked for \link Eigen::ComputeThinU ComputeThinU \endlink.
    *
    * The \a m first columns of \a U are the left singular vectors of the matrix being decomposed.
@@ -98,13 +98,13 @@ public:
   const MatrixUType& matrixU() const
   {
     eigen_assert(m_isInitialized && "SVD is not initialized.");
-    eigen_assert(computeU() && "This SVD decomposition didn't compute U. Did you ask for it?");
+    eigen_assert(computeU() && "This SVD descene didn't compute U. Did you ask for it?");
     return m_matrixU;
   }
 
   /** \returns the \a V matrix.
    *
-   * For the SVD decomposition of a n-by-p matrix, letting \a m be the minimum of \a n and \a p,
+   * For the SVD descene of a n-by-p matrix, letting \a m be the minimum of \a n and \a p,
    * the V matrix is p-by-p if you asked for \link Eigen::ComputeFullV ComputeFullV \endlink, and is p-by-m if you asked for \link Eigen::ComputeThinV ComputeThinV \endlink.
    *
    * The \a m first columns of \a V are the right singular vectors of the matrix being decomposed.
@@ -114,13 +114,13 @@ public:
   const MatrixVType& matrixV() const
   {
     eigen_assert(m_isInitialized && "SVD is not initialized.");
-    eigen_assert(computeV() && "This SVD decomposition didn't compute V. Did you ask for it?");
+    eigen_assert(computeV() && "This SVD descene didn't compute V. Did you ask for it?");
     return m_matrixV;
   }
 
   /** \returns the vector of singular values.
    *
-   * For the SVD decomposition of a n-by-p matrix, letting \a m be the minimum of \a n and \a p, the
+   * For the SVD descene of a n-by-p matrix, letting \a m be the minimum of \a n and \a p, the
    * returned vector has size \a m.  Singular values are always sorted in decreasing order.
    */
   const SingularValuesType& singularValues() const
@@ -155,7 +155,7 @@ public:
   
   /** Allows to prescribe a threshold to be used by certain methods, such as rank() and solve(),
     * which need to determine when singular values are to be considered nonzero.
-    * This is not used for the SVD decomposition itself.
+    * This is not used for the SVD descene itself.
     *
     * When it needs to get the threshold value, Eigen calls threshold().
     * The default is \c NumTraits<Scalar>::epsilon()
@@ -201,16 +201,16 @@ public:
                                     : RealScalar(diagSize)*NumTraits<Scalar>::epsilon();
   }
 
-  /** \returns true if \a U (full or thin) is asked for in this SVD decomposition */
+  /** \returns true if \a U (full or thin) is asked for in this SVD descene */
   inline bool computeU() const { return m_computeFullU || m_computeThinU; }
-  /** \returns true if \a V (full or thin) is asked for in this SVD decomposition */
+  /** \returns true if \a V (full or thin) is asked for in this SVD descene */
   inline bool computeV() const { return m_computeFullV || m_computeThinV; }
 
   inline Index rows() const { return m_rows; }
   inline Index cols() const { return m_cols; }
   
   #ifdef EIGEN_PARSED_BY_DOXYGEN
-  /** \returns a (least squares) solution of \f$ A x = b \f$ using the current SVD decomposition of A.
+  /** \returns a (least squares) solution of \f$ A x = b \f$ using the current SVD descene of A.
     *
     * \param b the right-hand-side of the equation to solve.
     *
