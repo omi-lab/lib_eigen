@@ -26,7 +26,7 @@
 
  ********************************************************************************
  *   Content : Eigen bindings to LAPACKe
- *     LLt descene based on LAPACKE_?potrf function.
+ *     LLt decomposition based on LAPACKE_?potrf function.
  ********************************************************************************
 */
 

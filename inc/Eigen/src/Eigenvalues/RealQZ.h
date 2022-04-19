@@ -17,14 +17,14 @@ namespace Eigen {
    *
    * \class RealQZ
    *
-   * \brief Performs a real QZ descene of a pair of square matrices
+   * \brief Performs a real QZ decomposition of a pair of square matrices
    *
    * \tparam _MatrixType the type of the matrix of which we are computing the
-   * real QZ descene; this is expected to be an instantiation of the
+   * real QZ decomposition; this is expected to be an instantiation of the
    * Matrix class template.
    *
    * Given a real square matrices A and B, this class computes the real QZ
-   * descene: \f$ A = Q S Z \f$, \f$ B = Q T Z \f$ where Q and Z are
+   * decomposition: \f$ A = Q S Z \f$, \f$ B = Q T Z \f$ where Q and Z are
    * real orthogonal matrixes, T is upper-triangular matrix, and S is upper
    * quasi-triangular matrix. An orthogonal matrix is a matrix whose
    * inverse is equal to its transpose, \f$ U^{-1} = U^T \f$. A quasi-triangular
@@ -35,13 +35,13 @@ namespace Eigen {
    * The eigenvalues of the pencil \f$ A - z B \f$ can be obtained from
    * 1x1 and 2x2 blocks on the diagonals of S and T.
    *
-   * Call the function compute() to compute the real QZ descene of a
+   * Call the function compute() to compute the real QZ decomposition of a
    * given pair of matrices. Alternatively, you can use the 
    * RealQZ(const MatrixType& B, const MatrixType& B, bool computeQZ)
-   * constructor which computes the real QZ descene at construction
-   * time. Once the descene is computed, you can use the matrixS(),
+   * constructor which computes the real QZ decomposition at construction
+   * time. Once the decomposition is computed, you can use the matrixS(),
    * matrixT(), matrixQ() and matrixZ() functions to retrieve the matrices
-   * S, T, Q and Z in the descene. If computeQZ==false, some time
+   * S, T, Q and Z in the decomposition. If computeQZ==false, some time
    * is saved by not computing matrices Q and Z.
    *
    * Example: \include RealQZ_compute.cpp
@@ -74,10 +74,10 @@ namespace Eigen {
 
       /** \brief Default constructor.
        *
-       * \param [in] size  Positive integer, size of the matrix whose QZ descene will be computed.
+       * \param [in] size  Positive integer, size of the matrix whose QZ decomposition will be computed.
        *
        * The default constructor is useful in cases in which the user intends to
-       * perform descenes via compute().  The \p size parameter is only
+       * perform decompositions via compute().  The \p size parameter is only
        * used as a hint. It is not an error to give a wrong \p size, but it may
        * impair performance.
        *
@@ -94,13 +94,13 @@ namespace Eigen {
         m_computeQZ(true)
       {}
 
-      /** \brief Constructor; computes real QZ descene of given matrices
+      /** \brief Constructor; computes real QZ decomposition of given matrices
        * 
        * \param[in]  A          Matrix A.
        * \param[in]  B          Matrix B.
        * \param[in]  computeQZ  If false, A and Z are not computed.
        *
-       * This constructor calls compute() to compute the QZ descene.
+       * This constructor calls compute() to compute the QZ decomposition.
        */
       RealQZ(const MatrixType& A, const MatrixType& B, bool computeQZ = true) :
         m_S(A.rows(),A.cols()),
@@ -115,27 +115,27 @@ namespace Eigen {
         compute(A, B, computeQZ);
       }
 
-      /** \brief Returns matrix Q in the QZ descene. 
+      /** \brief Returns matrix Q in the QZ decomposition. 
        *
        * \returns A const reference to the matrix Q.
        */
       const MatrixType& matrixQ() const {
         eigen_assert(m_isInitialized && "RealQZ is not initialized.");
-        eigen_assert(m_computeQZ && "The matrices Q and Z have not been computed during the QZ descene.");
+        eigen_assert(m_computeQZ && "The matrices Q and Z have not been computed during the QZ decomposition.");
         return m_Q;
       }
 
-      /** \brief Returns matrix Z in the QZ descene. 
+      /** \brief Returns matrix Z in the QZ decomposition. 
        *
        * \returns A const reference to the matrix Z.
        */
       const MatrixType& matrixZ() const {
         eigen_assert(m_isInitialized && "RealQZ is not initialized.");
-        eigen_assert(m_computeQZ && "The matrices Q and Z have not been computed during the QZ descene.");
+        eigen_assert(m_computeQZ && "The matrices Q and Z have not been computed during the QZ decomposition.");
         return m_Z;
       }
 
-      /** \brief Returns matrix S in the QZ descene. 
+      /** \brief Returns matrix S in the QZ decomposition. 
        *
        * \returns A const reference to the matrix S.
        */
@@ -144,7 +144,7 @@ namespace Eigen {
         return m_S;
       }
 
-      /** \brief Returns matrix S in the QZ descene. 
+      /** \brief Returns matrix S in the QZ decomposition. 
        *
        * \returns A const reference to the matrix S.
        */
@@ -153,7 +153,7 @@ namespace Eigen {
         return m_T;
       }
 
-      /** \brief Computes QZ descene of given matrix. 
+      /** \brief Computes QZ decomposition of given matrix. 
        * 
        * \param[in]  A          Matrix A.
        * \param[in]  B          Matrix B.
@@ -222,7 +222,7 @@ namespace Eigen {
 
       const Index dim = m_S.cols();
 
-      // perform QR descene of T, overwrite T with R, save Q
+      // perform QR decomposition of T, overwrite T with R, save Q
       HouseholderQR<MatrixType> qrT(m_T);
       m_T = qrT.matrixQR();
       m_T.template triangularView<StrictlyLower>().setZero();
@@ -571,7 +571,7 @@ namespace Eigen {
       m_workspace.resize(dim*2);
       m_global_iter = 0;
 
-      // entrance point: hessenberg triangular descene
+      // entrance point: hessenberg triangular decomposition
       hessenbergTriangular();
       // compute L1 vector norms of T, S into m_normOfS, m_normOfT
       computeNorms();

@@ -163,7 +163,7 @@ class SimplicialCholeskyBase : public SparseSolverBase<Derived>
     template<typename Rhs,typename Dest>
     void _solve_impl(const MatrixBase<Rhs> &b, MatrixBase<Dest> &dest) const
     {
-      eigen_assert(m_factorizationIsOk && "The descene is not in a valid state for solving, you must first call either compute() or symbolic()/numeric()");
+      eigen_assert(m_factorizationIsOk && "The decomposition is not in a valid state for solving, you must first call either compute() or symbolic()/numeric()");
       eigen_assert(m_matrix.rows()==b.rows());
 
       if(m_info!=Success)
@@ -197,7 +197,7 @@ class SimplicialCholeskyBase : public SparseSolverBase<Derived>
 
   protected:
     
-    /** Computes the sparse Cholesky descene of \a matrix */
+    /** Computes the sparse Cholesky decomposition of \a matrix */
     template<bool DoLDLT>
     void compute(const MatrixType& matrix)
     {
@@ -368,14 +368,14 @@ public:
         return Traits::getU(Base::m_matrix);
     }
     
-    /** Computes the sparse Cholesky descene of \a matrix */
+    /** Computes the sparse Cholesky decomposition of \a matrix */
     SimplicialLLT& compute(const MatrixType& matrix)
     {
       Base::template compute<false>(matrix);
       return *this;
     }
 
-    /** Performs a symbolic descene on the sparcity of \a matrix.
+    /** Performs a symbolic decomposition on the sparcity of \a matrix.
       *
       * This function is particularly useful when solving for several problems having the same structure.
       *
@@ -386,9 +386,9 @@ public:
       Base::analyzePattern(a, false);
     }
 
-    /** Performs a numeric descene of \a matrix
+    /** Performs a numeric decomposition of \a matrix
       *
-      * The given matrix must has the same sparcity than the matrix on which the symbolic descene has been performed.
+      * The given matrix must has the same sparcity than the matrix on which the symbolic decomposition has been performed.
       *
       * \sa analyzePattern()
       */
@@ -465,14 +465,14 @@ public:
         return Traits::getU(Base::m_matrix);
     }
 
-    /** Computes the sparse Cholesky descene of \a matrix */
+    /** Computes the sparse Cholesky decomposition of \a matrix */
     SimplicialLDLT& compute(const MatrixType& matrix)
     {
       Base::template compute<true>(matrix);
       return *this;
     }
     
-    /** Performs a symbolic descene on the sparcity of \a matrix.
+    /** Performs a symbolic decomposition on the sparcity of \a matrix.
       *
       * This function is particularly useful when solving for several problems having the same structure.
       *
@@ -483,9 +483,9 @@ public:
       Base::analyzePattern(a, true);
     }
 
-    /** Performs a numeric descene of \a matrix
+    /** Performs a numeric decomposition of \a matrix
       *
-      * The given matrix must has the same sparcity than the matrix on which the symbolic descene has been performed.
+      * The given matrix must has the same sparcity than the matrix on which the symbolic decomposition has been performed.
       *
       * \sa analyzePattern()
       */
@@ -557,7 +557,7 @@ public:
         return Base::m_matrix;
     }
     
-    /** Computes the sparse Cholesky descene of \a matrix */
+    /** Computes the sparse Cholesky decomposition of \a matrix */
     SimplicialCholesky& compute(const MatrixType& matrix)
     {
       if(m_LDLT)
@@ -567,7 +567,7 @@ public:
       return *this;
     }
 
-    /** Performs a symbolic descene on the sparcity of \a matrix.
+    /** Performs a symbolic decomposition on the sparcity of \a matrix.
       *
       * This function is particularly useful when solving for several problems having the same structure.
       *
@@ -578,9 +578,9 @@ public:
       Base::analyzePattern(a, m_LDLT);
     }
 
-    /** Performs a numeric descene of \a matrix
+    /** Performs a numeric decomposition of \a matrix
       *
-      * The given matrix must has the same sparcity than the matrix on which the symbolic descene has been performed.
+      * The given matrix must has the same sparcity than the matrix on which the symbolic decomposition has been performed.
       *
       * \sa analyzePattern()
       */
@@ -596,7 +596,7 @@ public:
     template<typename Rhs,typename Dest>
     void _solve_impl(const MatrixBase<Rhs> &b, MatrixBase<Dest> &dest) const
     {
-      eigen_assert(Base::m_factorizationIsOk && "The descene is not in a valid state for solving, you must first call either compute() or symbolic()/numeric()");
+      eigen_assert(Base::m_factorizationIsOk && "The decomposition is not in a valid state for solving, you must first call either compute() or symbolic()/numeric()");
       eigen_assert(Base::m_matrix.rows()==b.rows());
 
       if(Base::m_info!=Success)

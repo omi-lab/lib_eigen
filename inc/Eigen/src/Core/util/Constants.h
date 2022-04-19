@@ -379,7 +379,7 @@ enum AccessorLevels {
 };
 
 /** \ingroup enums
-  * Enum with options to give to various descenes. */
+  * Enum with options to give to various decompositions. */
 enum DecompositionOptions {
   /** \internal Not used (meant for LDLT?). */
   Pivoting            = 0x01, 
@@ -419,11 +419,11 @@ enum DecompositionOptions {
 enum QRPreconditioners {
   /** Do not specify what is to be done if the SVD of a non-square matrix is asked for. */
   NoQRPreconditioner,
-  /** Use a QR descene without pivoting as the first step. */
+  /** Use a QR decomposition without pivoting as the first step. */
   HouseholderQRPreconditioner,
-  /** Use a QR descene with column pivoting as the first step. */
+  /** Use a QR decomposition with column pivoting as the first step. */
   ColPivHouseholderQRPreconditioner,
-  /** Use a QR descene with full pivoting as the first step. */
+  /** Use a QR decomposition with full pivoting as the first step. */
   FullPivHouseholderQRPreconditioner
 };
 

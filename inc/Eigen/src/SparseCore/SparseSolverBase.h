@@ -79,7 +79,7 @@ class SparseSolverBase : internal::noncopyable
     Derived& derived() { return *static_cast<Derived*>(this); }
     const Derived& derived() const { return *static_cast<const Derived*>(this); }
     
-    /** \returns an expression of the solution x of \f$ A x = b \f$ using the current descene of A.
+    /** \returns an expression of the solution x of \f$ A x = b \f$ using the current decomposition of A.
       *
       * \sa compute()
       */
@@ -92,7 +92,7 @@ class SparseSolverBase : internal::noncopyable
       return Solve<Derived, Rhs>(derived(), b.derived());
     }
     
-    /** \returns an expression of the solution x of \f$ A x = b \f$ using the current descene of A.
+    /** \returns an expression of the solution x of \f$ A x = b \f$ using the current decomposition of A.
       *
       * \sa compute()
       */

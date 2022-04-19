@@ -25,24 +25,24 @@ template<typename MatrixType, bool IsComplex> struct complex_schur_reduce_to_hes
   *
   * \class ComplexSchur
   *
-  * \brief Performs a complex Schur descene of a real or complex square matrix
+  * \brief Performs a complex Schur decomposition of a real or complex square matrix
   *
   * \tparam _MatrixType the type of the matrix of which we are
-  * computing the Schur descene; this is expected to be an
+  * computing the Schur decomposition; this is expected to be an
   * instantiation of the Matrix class template.
   *
   * Given a real or complex square matrix A, this class computes the
-  * Schur descene: \f$ A = U T U^*\f$ where U is a unitary
+  * Schur decomposition: \f$ A = U T U^*\f$ where U is a unitary
   * complex matrix, and T is a complex upper triangular matrix.  The
   * diagonal of the matrix T corresponds to the eigenvalues of the
   * matrix A.
   *
-  * Call the function compute() to compute the Schur descene of
+  * Call the function compute() to compute the Schur decomposition of
   * a given matrix. Alternatively, you can use the 
   * ComplexSchur(const MatrixType&, bool) constructor which computes
-  * the Schur descene at construction time. Once the
-  * descene is computed, you can use the matrixU() and matrixT()
-  * functions to retrieve the matrices U and V in the descene.
+  * the Schur decomposition at construction time. Once the
+  * decomposition is computed, you can use the matrixU() and matrixT()
+  * functions to retrieve the matrices U and V in the decomposition.
   *
   * \note This code is inspired from Jampack
   *
@@ -73,7 +73,7 @@ template<typename _MatrixType> class ComplexSchur
       */
     typedef std::complex<RealScalar> ComplexScalar;
 
-    /** \brief Type for the matrices in the Schur descene.
+    /** \brief Type for the matrices in the Schur decomposition.
       *
       * This is a square matrix with entries of type #ComplexScalar. 
       * The size is the same as the size of \p _MatrixType.
@@ -82,10 +82,10 @@ template<typename _MatrixType> class ComplexSchur
 
     /** \brief Default constructor.
       *
-      * \param [in] size  Positive integer, size of the matrix whose Schur descene will be computed.
+      * \param [in] size  Positive integer, size of the matrix whose Schur decomposition will be computed.
       *
       * The default constructor is useful in cases in which the user
-      * intends to perform descenes via compute().  The \p size
+      * intends to perform decompositions via compute().  The \p size
       * parameter is only used as a hint. It is not an error to give a
       * wrong \p size, but it may impair performance.
       *
@@ -100,12 +100,12 @@ template<typename _MatrixType> class ComplexSchur
         m_maxIters(-1)
     {}
 
-    /** \brief Constructor; computes Schur descene of given matrix. 
+    /** \brief Constructor; computes Schur decomposition of given matrix. 
       * 
-      * \param[in]  matrix    Square matrix whose Schur descene is to be computed.
+      * \param[in]  matrix    Square matrix whose Schur decomposition is to be computed.
       * \param[in]  computeU  If true, both T and U are computed; if false, only T is computed.
       *
-      * This constructor calls compute() to compute the Schur descene.
+      * This constructor calls compute() to compute the Schur decomposition.
       *
       * \sa matrixT() and matrixU() for examples.
       */
@@ -121,14 +121,14 @@ template<typename _MatrixType> class ComplexSchur
       compute(matrix.derived(), computeU);
     }
 
-    /** \brief Returns the unitary matrix in the Schur descene. 
+    /** \brief Returns the unitary matrix in the Schur decomposition. 
       *
       * \returns A const reference to the matrix U.
       *
       * It is assumed that either the constructor
       * ComplexSchur(const MatrixType& matrix, bool computeU) or the
       * member function compute(const MatrixType& matrix, bool computeU)
-      * has been called before to compute the Schur descene of a
+      * has been called before to compute the Schur decomposition of a
       * matrix, and that \p computeU was set to true (the default
       * value).
       *
@@ -138,18 +138,18 @@ template<typename _MatrixType> class ComplexSchur
     const ComplexMatrixType& matrixU() const
     {
       eigen_assert(m_isInitialized && "ComplexSchur is not initialized.");
-      eigen_assert(m_matUisUptodate && "The matrix U has not been computed during the ComplexSchur descene.");
+      eigen_assert(m_matUisUptodate && "The matrix U has not been computed during the ComplexSchur decomposition.");
       return m_matU;
     }
 
-    /** \brief Returns the triangular matrix in the Schur descene. 
+    /** \brief Returns the triangular matrix in the Schur decomposition. 
       *
       * \returns A const reference to the matrix T.
       *
       * It is assumed that either the constructor
       * ComplexSchur(const MatrixType& matrix, bool computeU) or the
       * member function compute(const MatrixType& matrix, bool computeU)
-      * has been called before to compute the Schur descene of a
+      * has been called before to compute the Schur decomposition of a
       * matrix.
       *
       * Note that this function returns a plain square matrix. If you want to reference
@@ -165,18 +165,18 @@ template<typename _MatrixType> class ComplexSchur
       return m_matT;
     }
 
-    /** \brief Computes Schur descene of given matrix. 
+    /** \brief Computes Schur decomposition of given matrix. 
       * 
-      * \param[in]  matrix  Square matrix whose Schur descene is to be computed.
+      * \param[in]  matrix  Square matrix whose Schur decomposition is to be computed.
       * \param[in]  computeU  If true, both T and U are computed; if false, only T is computed.
 
       * \returns    Reference to \c *this
       *
-      * The Schur descene is computed by first reducing the
+      * The Schur decomposition is computed by first reducing the
       * matrix to Hessenberg form using the class
       * HessenbergDecomposition. The Hessenberg matrix is then reduced
       * to triangular form by performing QR iterations with a single
-      * shift. The cost of computing the Schur descene depends
+      * shift. The cost of computing the Schur decomposition depends
       * on the number of iterations; as a rough guide, it may be taken
       * on the number of iterations; as a rough guide, it may be taken
       * to be \f$25n^3\f$ complex flops, or \f$10n^3\f$ complex flops
@@ -190,7 +190,7 @@ template<typename _MatrixType> class ComplexSchur
     template<typename InputType>
     ComplexSchur& compute(const EigenBase<InputType>& matrix, bool computeU = true);
     
-    /** \brief Compute Schur descene from a given Hessenberg matrix
+    /** \brief Compute Schur decomposition from a given Hessenberg matrix
      *  \param[in] matrixH Matrix in Hessenberg form H
      *  \param[in] matrixQ orthogonal matrix Q that transform a matrix A to H : A = Q H Q^T
      *  \param computeU Computes the matriX U of the Schur vectors
@@ -198,7 +198,7 @@ template<typename _MatrixType> class ComplexSchur
      * 
      *  This routine assumes that the matrix is already reduced in Hessenberg form matrixH
      *  using either the class HessenbergDecomposition or another mean. 
-     *  It computes the upper quasi-triangular matrix T of the Schur descene of H
+     *  It computes the upper quasi-triangular matrix T of the Schur decomposition of H
      *  When computeU is true, this routine computes the matrix U such that 
      *  A = U T U^T =  (QZ) T (QZ)^T = Q H Q^T where A is the initial matrix
      * 

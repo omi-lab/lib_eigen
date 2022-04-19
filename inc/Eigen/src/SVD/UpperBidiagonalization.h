@@ -49,7 +49,7 @@ template<typename _MatrixType> class UpperBidiagonalization
     * \brief Default Constructor.
     *
     * The default constructor is useful in cases in which the user intends to
-    * perform descenes via Bidiagonalization::compute(const MatrixType&).
+    * perform decompositions via Bidiagonalization::compute(const MatrixType&).
     */
     UpperBidiagonalization() : m_householder(), m_bidiagonal(), m_isInitialized(false) {}
 
@@ -395,7 +395,7 @@ UpperBidiagonalization<_MatrixType>& UpperBidiagonalization<_MatrixType>::comput
 }
 
 #if 0
-/** \return the Householder QR descene of \c *this.
+/** \return the Householder QR decomposition of \c *this.
   *
   * \sa class Bidiagonalization
   */

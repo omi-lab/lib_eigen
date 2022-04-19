@@ -23,7 +23,7 @@ namespace Eigen {
   * \brief Computes eigenvalues and eigenvectors of the generalized selfadjoint eigen problem
   *
   * \tparam _MatrixType the type of the matrix of which we are computing the
-  * eigendescene; this is expected to be an instantiation of the Matrix
+  * eigendecomposition; this is expected to be an instantiation of the Matrix
   * class template.
   *
   * This class solves the generalized eigenvalue problem
@@ -55,7 +55,7 @@ class GeneralizedSelfAdjointEigenSolver : public SelfAdjointEigenSolver<_MatrixT
     /** \brief Default constructor for fixed-size matrices.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform descenes via compute(). This constructor
+      * perform decompositions via compute(). This constructor
       * can only be used if \p _MatrixType is a fixed-size matrix; use
       * GeneralizedSelfAdjointEigenSolver(Index) for dynamic-size matrices.
       */
@@ -67,7 +67,7 @@ class GeneralizedSelfAdjointEigenSolver : public SelfAdjointEigenSolver<_MatrixT
       * eigenvalues and eigenvectors will be computed.
       *
       * This constructor is useful for dynamic-size matrices, when the user
-      * intends to perform descenes via compute(). The \p size
+      * intends to perform decompositions via compute(). The \p size
       * parameter is only used as a hint. It is not an error to give a wrong
       * \p size, but it may impair performance.
       *
@@ -77,7 +77,7 @@ class GeneralizedSelfAdjointEigenSolver : public SelfAdjointEigenSolver<_MatrixT
         : Base(size)
     {}
 
-    /** \brief Constructor; computes generalized eigendescene of given matrix pencil.
+    /** \brief Constructor; computes generalized eigendecomposition of given matrix pencil.
       *
       * \param[in]  matA  Selfadjoint matrix in matrix pencil.
       *                   Only the lower triangular part of the matrix is referenced.
@@ -110,7 +110,7 @@ class GeneralizedSelfAdjointEigenSolver : public SelfAdjointEigenSolver<_MatrixT
       compute(matA, matB, options);
     }
 
-    /** \brief Computes generalized eigendescene of given matrix pencil.
+    /** \brief Computes generalized eigendecomposition of given matrix pencil.
       *
       * \param[in]  matA  Selfadjoint matrix in matrix pencil.
       *                   Only the lower triangular part of the matrix is referenced.
@@ -135,8 +135,8 @@ class GeneralizedSelfAdjointEigenSolver : public SelfAdjointEigenSolver<_MatrixT
       * eigenvectors are also computed and can be retrieved by calling
       * eigenvectors().
       *
-      * The implementation uses LLT to compute the Cholesky descene
-      * \f$ B = LL^* \f$ and computes the classical eigendescene
+      * The implementation uses LLT to compute the Cholesky decomposition
+      * \f$ B = LL^* \f$ and computes the classical eigendecomposition
       * of the selfadjoint matrix \f$ L^{-1} A (L^*)^{-1} \f$ if \p options contains Ax_lBx
       * and of \f$ L^{*} A L \f$ otherwise. This solves the
       * generalized eigenproblem, because any solution of the generalized
@@ -171,7 +171,7 @@ compute(const MatrixType& matA, const MatrixType& matB, int options)
 
   bool computeEigVecs = ((options&EigVecMask)==0) || ((options&EigVecMask)==ComputeEigenvectors);
 
-  // Compute the cholesky descene of matB = L L' = U'U
+  // Compute the cholesky decomposition of matB = L L' = U'U
   LLT<MatrixType> cholB(matB);
 
   int type = (options&GenEigMask);

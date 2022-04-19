@@ -23,7 +23,7 @@ namespace Eigen {
   * \brief Computes eigenvalues and eigenvectors of general matrices
   *
   * \tparam _MatrixType the type of the matrix of which we are computing the
-  * eigendescene; this is expected to be an instantiation of the Matrix
+  * eigendecomposition; this is expected to be an instantiation of the Matrix
   * class template. Currently, only real matrices are supported.
   *
   * The eigenvalues and eigenvectors of a matrix \f$ A \f$ are scalars
@@ -31,17 +31,17 @@ namespace Eigen {
   * \f$ D \f$ is a diagonal matrix with the eigenvalues on the diagonal, and
   * \f$ V \f$ is a matrix with the eigenvectors as its columns, then \f$ A V =
   * V D \f$. The matrix \f$ V \f$ is almost always invertible, in which case we
-  * have \f$ A = V D V^{-1} \f$. This is called the eigendescene.
+  * have \f$ A = V D V^{-1} \f$. This is called the eigendecomposition.
   *
   * The eigenvalues and eigenvectors of a matrix may be complex, even when the
   * matrix is real. However, we can choose real matrices \f$ V \f$ and \f$ D
-  * \f$ satisfying \f$ A V = V D \f$, just like the eigendescene, if the
+  * \f$ satisfying \f$ A V = V D \f$, just like the eigendecomposition, if the
   * matrix \f$ D \f$ is not required to be diagonal, but if it is allowed to
   * have blocks of the form
   * \f[ \begin{bmatrix} u & v \\ -v & u \end{bmatrix} \f]
   * (where \f$ u \f$ and \f$ v \f$ are real numbers) on the diagonal.  These
   * blocks correspond to complex eigenvalue pairs \f$ u \pm iv \f$. We call
-  * this variant of the eigendescene the pseudo-eigendescene.
+  * this variant of the eigendecomposition the pseudo-eigendecomposition.
   *
   * Call the function compute() to compute the eigenvalues and eigenvectors of
   * a given matrix. Alternatively, you can use the 
@@ -50,7 +50,7 @@ namespace Eigen {
   * eigenvectors are computed, they can be retrieved with the eigenvalues() and
   * eigenvectors() functions. The pseudoEigenvalueMatrix() and
   * pseudoEigenvectors() methods allow the construction of the
-  * pseudo-eigendescene.
+  * pseudo-eigendecomposition.
   *
   * The documentation for EigenSolver(const MatrixType&, bool) contains an
   * example of the typical use of this class.
@@ -106,7 +106,7 @@ template<typename _MatrixType> class EigenSolver
     /** \brief Default constructor.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform descenes via EigenSolver::compute(const MatrixType&, bool).
+      * perform decompositions via EigenSolver::compute(const MatrixType&, bool).
       *
       * \sa compute() for an example.
       */
@@ -128,9 +128,9 @@ template<typename _MatrixType> class EigenSolver
         m_tmp(size)
     {}
 
-    /** \brief Constructor; computes eigendescene of given matrix. 
+    /** \brief Constructor; computes eigendecomposition of given matrix. 
       * 
-      * \param[in]  matrix  Square matrix whose eigendescene is to be computed.
+      * \param[in]  matrix  Square matrix whose eigendecomposition is to be computed.
       * \param[in]  computeEigenvectors  If true, both the eigenvectors and the
       *    eigenvalues are computed; if false, only the eigenvalues are
       *    computed. 
@@ -169,7 +169,7 @@ template<typename _MatrixType> class EigenSolver
       * to eigenvalue number \f$ k \f$ as returned by eigenvalues().  The
       * eigenvectors are normalized to have (Euclidean) norm equal to one. The
       * matrix returned by this function is the matrix \f$ V \f$ in the
-      * eigendescene \f$ A = V D V^{-1} \f$, if it exists.
+      * eigendecomposition \f$ A = V D V^{-1} \f$, if it exists.
       *
       * Example: \include EigenSolver_eigenvectors.cpp
       * Output: \verbinclude EigenSolver_eigenvectors.out
@@ -203,7 +203,7 @@ template<typename _MatrixType> class EigenSolver
       return m_eivec;
     }
 
-    /** \brief Returns the block-diagonal matrix in the pseudo-eigendescene.
+    /** \brief Returns the block-diagonal matrix in the pseudo-eigendecomposition.
       *
       * \returns  A block-diagonal matrix.
       *
@@ -247,9 +247,9 @@ template<typename _MatrixType> class EigenSolver
       return m_eivalues;
     }
 
-    /** \brief Computes eigendescene of given matrix. 
+    /** \brief Computes eigendecomposition of given matrix. 
       * 
-      * \param[in]  matrix  Square matrix whose eigendescene is to be computed.
+      * \param[in]  matrix  Square matrix whose eigendecomposition is to be computed.
       * \param[in]  computeEigenvectors  If true, both the eigenvectors and the
       *    eigenvalues are computed; if false, only the eigenvalues are
       *    computed. 
@@ -261,11 +261,11 @@ template<typename _MatrixType> class EigenSolver
       * and can be retrieved by calling eigenvectors().
       *
       * The matrix is first reduced to real Schur form using the RealSchur
-      * class. The Schur descene is then used to compute the eigenvalues
+      * class. The Schur decomposition is then used to compute the eigenvalues
       * and eigenvectors.
       *
       * The cost of the computation is dominated by the cost of the
-      * Schur descene, which is very approximately \f$ 25n^3 \f$
+      * Schur decomposition, which is very approximately \f$ 25n^3 \f$
       * (where \f$ n \f$ is the size of the matrix) if \p computeEigenvectors 
       * is true, and \f$ 10n^3 \f$ if \p computeEigenvectors is false.
       *

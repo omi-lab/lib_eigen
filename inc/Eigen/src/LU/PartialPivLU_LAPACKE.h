@@ -26,7 +26,7 @@
 
  ********************************************************************************
  *   Content : Eigen bindings to LAPACKe
- *     LU descene with partial pivoting based on LAPACKE_?getrf function.
+ *     LU decomposition with partial pivoting based on LAPACKE_?getrf function.
  ********************************************************************************
 */
 
@@ -43,7 +43,7 @@ namespace internal {
 template<int StorageOrder> \
 struct partial_lu_impl<EIGTYPE, StorageOrder, lapack_int> \
 { \
-  /* \internal performs the LU descene in-place of the matrix represented */ \
+  /* \internal performs the LU decomposition in-place of the matrix represented */ \
   static lapack_int blocked_lu(Index rows, Index cols, EIGTYPE* lu_data, Index luStride, lapack_int* row_transpositions, lapack_int& nb_transpositions, lapack_int maxBlockSize=256) \
   { \
     EIGEN_UNUSED_VARIABLE(maxBlockSize);\

@@ -269,7 +269,7 @@ class CholmodBase : public SparseSolverBase<Derived>
       return m_info;
     }
 
-    /** Computes the sparse Cholesky descene of \a matrix */
+    /** Computes the sparse Cholesky decomposition of \a matrix */
     Derived& compute(const MatrixType& matrix)
     {
       analyzePattern(matrix);
@@ -277,7 +277,7 @@ class CholmodBase : public SparseSolverBase<Derived>
       return derived();
     }
 
-    /** Performs a symbolic descene on the sparsity pattern of \a matrix.
+    /** Performs a symbolic decomposition on the sparsity pattern of \a matrix.
       *
       * This function is particularly useful when solving for several problems having the same structure.
       *
@@ -299,9 +299,9 @@ class CholmodBase : public SparseSolverBase<Derived>
       m_factorizationIsOk = false;
     }
 
-    /** Performs a numeric descene of \a matrix
+    /** Performs a numeric decomposition of \a matrix
       *
-      * The given matrix must have the same sparsity pattern as the matrix on which the symbolic descene has been performed.
+      * The given matrix must have the same sparsity pattern as the matrix on which the symbolic decomposition has been performed.
       *
       * \sa analyzePattern()
       */
@@ -325,7 +325,7 @@ class CholmodBase : public SparseSolverBase<Derived>
     template<typename Rhs,typename Dest>
     void _solve_impl(const MatrixBase<Rhs> &b, MatrixBase<Dest> &dest) const
     {
-      eigen_assert(m_factorizationIsOk && "The descene is not in a valid state for solving, you must first call either compute() or symbolic()/numeric()");
+      eigen_assert(m_factorizationIsOk && "The decomposition is not in a valid state for solving, you must first call either compute() or symbolic()/numeric()");
       const Index size = m_cholmodFactor->n;
       EIGEN_UNUSED_VARIABLE(size);
       eigen_assert(size==b.rows());
@@ -350,7 +350,7 @@ class CholmodBase : public SparseSolverBase<Derived>
     template<typename RhsDerived, typename DestDerived>
     void _solve_impl(const SparseMatrixBase<RhsDerived> &b, SparseMatrixBase<DestDerived> &dest) const
     {
-      eigen_assert(m_factorizationIsOk && "The descene is not in a valid state for solving, you must first call either compute() or symbolic()/numeric()");
+      eigen_assert(m_factorizationIsOk && "The decomposition is not in a valid state for solving, you must first call either compute() or symbolic()/numeric()");
       const Index size = m_cholmodFactor->n;
       EIGEN_UNUSED_VARIABLE(size);
       eigen_assert(size==b.rows());
@@ -399,7 +399,7 @@ class CholmodBase : public SparseSolverBase<Derived>
     {
       using std::log;
       using numext::real;
-      eigen_assert(m_factorizationIsOk && "The descene is not in a valid state for solving, you must first call either compute() or symbolic()/numeric()");
+      eigen_assert(m_factorizationIsOk && "The decomposition is not in a valid state for solving, you must first call either compute() or symbolic()/numeric()");
 
       RealScalar logDet = 0;
       Scalar *x = static_cast<Scalar*>(m_cholmodFactor->x);

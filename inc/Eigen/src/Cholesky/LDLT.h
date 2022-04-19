@@ -35,24 +35,24 @@ namespace internal {
   *
   * \class LDLT
   *
-  * \brief Robust Cholesky descene of a matrix with pivoting
+  * \brief Robust Cholesky decomposition of a matrix with pivoting
   *
-  * \tparam _MatrixType the type of the matrix of which to compute the LDL^T Cholesky descene
+  * \tparam _MatrixType the type of the matrix of which to compute the LDL^T Cholesky decomposition
   * \tparam _UpLo the triangular part that will be used for the decompositon: Lower (default) or Upper.
   *             The other triangular part won't be read.
   *
-  * Perform a robust Cholesky descene of a positive semidefinite or negative semidefinite
+  * Perform a robust Cholesky decomposition of a positive semidefinite or negative semidefinite
   * matrix \f$ A \f$ such that \f$ A =  P^TLDL^*P \f$, where P is a permutation matrix, L
   * is lower triangular with a unit diagonal and D is a diagonal matrix.
   *
-  * The descene uses pivoting to ensure stability, so that L will have
+  * The decomposition uses pivoting to ensure stability, so that L will have
   * zeros in the bottom right rank(A) - n submatrix. Avoiding the square root
   * on D also stabilizes the computation.
   *
-  * Remember that Cholesky descenes are not rank-revealing. Also, do not use a Cholesky
-  * descene to determine whether a system of equations has a solution.
+  * Remember that Cholesky decompositions are not rank-revealing. Also, do not use a Cholesky
+  * decomposition to determine whether a system of equations has a solution.
   *
-  * This class supports the \link InplaceDecomposition inplace descene \endlink mechanism.
+  * This class supports the \link InplaceDecomposition inplace decomposition \endlink mechanism.
   * 
   * \sa MatrixBase::ldlt(), SelfAdjointView::ldlt(), class LLT
   */
@@ -80,7 +80,7 @@ template<typename _MatrixType, int _UpLo> class LDLT
     /** \brief Default Constructor.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform descenes via LDLT::compute(const MatrixType&).
+      * perform decompositions via LDLT::compute(const MatrixType&).
       */
     LDLT()
       : m_matrix(),
@@ -103,9 +103,9 @@ template<typename _MatrixType, int _UpLo> class LDLT
         m_isInitialized(false)
     {}
 
-    /** \brief Constructor with descene
+    /** \brief Constructor with decomposition
       *
-      * This calculates the descene for the input \a matrix.
+      * This calculates the decomposition for the input \a matrix.
       *
       * \sa LDLT(Index size)
       */
@@ -122,7 +122,7 @@ template<typename _MatrixType, int _UpLo> class LDLT
 
     /** \brief Constructs a LDLT factorization from a given matrix
       *
-      * This overloaded constructor is provided for \link InplaceDecomposition inplace descene \endlink when \c MatrixType is a Eigen::Ref.
+      * This overloaded constructor is provided for \link InplaceDecomposition inplace decomposition \endlink when \c MatrixType is a Eigen::Ref.
       *
       * \sa LDLT(const EigenBase&)
       */
@@ -137,7 +137,7 @@ template<typename _MatrixType, int _UpLo> class LDLT
       compute(matrix.derived());
     }
 
-    /** Clear any existing descene
+    /** Clear any existing decomposition
      * \sa rankUpdate(w,sigma)
      */
     void setZero()
@@ -189,13 +189,13 @@ template<typename _MatrixType, int _UpLo> class LDLT
     }
 
     #ifdef EIGEN_PARSED_BY_DOXYGEN
-    /** \returns a solution x of \f$ A x = b \f$ using the current descene of A.
+    /** \returns a solution x of \f$ A x = b \f$ using the current decomposition of A.
       *
-      * This function also supports in-place solves using the syntax <tt>x = desceneObject.solve(x)</tt> .
+      * This function also supports in-place solves using the syntax <tt>x = decompositionObject.solve(x)</tt> .
       *
       * \note_about_checking_solutions
       *
-      * More precisely, this method solves \f$ A x = b \f$ using the descene \f$ A = P^T L D L^* P \f$
+      * More precisely, this method solves \f$ A x = b \f$ using the decomposition \f$ A = P^T L D L^* P \f$
       * by solving the systems \f$ P^T y_1 = b \f$, \f$ L y_2 = y_1 \f$, \f$ D y_3 = y_2 \f$,
       * \f$ L^* y_4 = y_3 \f$ and \f$ P x = y_4 \f$ in succession. If the matrix \f$ A \f$ is singular, then
       * \f$ D \f$ will also be singular (all the other matrices are invertible). In that case, the
@@ -216,7 +216,7 @@ template<typename _MatrixType, int _UpLo> class LDLT
     LDLT& compute(const EigenBase<InputType>& matrix);
 
     /** \returns an estimate of the reciprocal condition number of the matrix of
-     *  which \c *this is the LDLT descene.
+     *  which \c *this is the LDLT decomposition.
      */
     RealScalar rcond() const
     {
@@ -227,7 +227,7 @@ template<typename _MatrixType, int _UpLo> class LDLT
     template <typename Derived>
     LDLT& rankUpdate(const MatrixBase<Derived>& w, const RealScalar& alpha=1);
 
-    /** \returns the internal LDLT descene matrix
+    /** \returns the internal LDLT decomposition matrix
       *
       * TODO: document the storage layout
       */
@@ -239,10 +239,10 @@ template<typename _MatrixType, int _UpLo> class LDLT
 
     MatrixType reconstructedMatrix() const;
 
-    /** \returns the adjoint of \c *this, that is, a const reference to the descene itself as the underlying matrix is self-adjoint.
+    /** \returns the adjoint of \c *this, that is, a const reference to the decomposition itself as the underlying matrix is self-adjoint.
       *
-      * This method is provided for compatibility with other matrix descenes, thus enabling generic code such as:
-      * \code x = descene.adjoint().solve(b) \endcode
+      * This method is provided for compatibility with other matrix decompositions, thus enabling generic code such as:
+      * \code x = decomposition.adjoint().solve(b) \endcode
       */
     const LDLT& adjoint() const { return *this; };
 
@@ -276,8 +276,8 @@ template<typename _MatrixType, int _UpLo> class LDLT
     }
 
     /** \internal
-      * Used to compute and store the Cholesky descene A = L D L^* = U^* D U.
-      * The strict upper part is used during the descene, the strict lower
+      * Used to compute and store the Cholesky decomposition A = L D L^* = U^* D U.
+      * The strict upper part is used during the decomposition, the strict lower
       * part correspond to the coefficients of L (its diagonal is equal to 1 and
       * is not stored), and the diagonal entries correspond to D.
       */
@@ -424,7 +424,7 @@ template<> struct ldlt_inplace<Lower>
     // Apply the update
     for (Index j = 0; j < size; j++)
     {
-      // Check for termination due to an original descene of low-rank
+      // Check for termination due to an original decomposition of low-rank
       if (!(isfinite)(alpha))
         break;
 
@@ -492,7 +492,7 @@ template<typename MatrixType> struct LDLT_Traits<MatrixType,Upper>
 
 } // end namespace internal
 
-/** Compute / recompute the LDLT descene A = L D L^* = U^* D U of \a matrix
+/** Compute / recompute the LDLT decomposition A = L D L^* = U^* D U of \a matrix
   */
 template<typename MatrixType, int _UpLo>
 template<typename InputType>
@@ -529,8 +529,8 @@ LDLT<MatrixType,_UpLo>& LDLT<MatrixType,_UpLo>::compute(const EigenBase<InputTyp
   return *this;
 }
 
-/** Update the LDLT descene:  given A = L D L^T, efficiently compute the descene of A + sigma w w^T.
- * \param w a vector to be incorporated into the descene.
+/** Update the LDLT decomposition:  given A = L D L^T, efficiently compute the decomposition of A + sigma w w^T.
+ * \param w a vector to be incorporated into the decomposition.
  * \param sigma a scalar, +1 for updates and -1 for "downdates," which correspond to removing previously-added column vectors. Optional; default value is +1.
  * \sa setZero()
   */
@@ -617,7 +617,7 @@ void LDLT<_MatrixType,_UpLo>::_solve_impl_transposed(const RhsType &rhs, DstType
   *
   * \param bAndX represents both the right-hand side matrix b and result x.
   *
-  * \returns true always! If you need to check for existence of solutions, use another descene like LU, QR, or SVD.
+  * \returns true always! If you need to check for existence of solutions, use another decomposition like LU, QR, or SVD.
   *
   * This version avoids a copy when the right hand side matrix b is not
   * needed anymore.
@@ -636,7 +636,7 @@ bool LDLT<MatrixType,_UpLo>::solveInPlace(MatrixBase<Derived> &bAndX) const
   return true;
 }
 
-/** \returns the matrix represented by the descene,
+/** \returns the matrix represented by the decomposition,
  * i.e., it returns the product: P^T L D L^* P.
  * This function is provided for debug purpose. */
 template<typename MatrixType, int _UpLo>
@@ -662,7 +662,7 @@ MatrixType LDLT<MatrixType,_UpLo>::reconstructedMatrix() const
 }
 
 /** \cholesky_module
-  * \returns the Cholesky descene with full pivoting without square root of \c *this
+  * \returns the Cholesky decomposition with full pivoting without square root of \c *this
   * \sa MatrixBase::ldlt()
   */
 template<typename MatrixType, unsigned int UpLo>
@@ -673,7 +673,7 @@ SelfAdjointView<MatrixType, UpLo>::ldlt() const
 }
 
 /** \cholesky_module
-  * \returns the Cholesky descene with full pivoting without square root of \c *this
+  * \returns the Cholesky decomposition with full pivoting without square root of \c *this
   * \sa SelfAdjointView::ldlt()
   */
 template<typename Derived>

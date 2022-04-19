@@ -43,7 +43,7 @@ namespace internal {
   * \class SparseQR
   * \brief Sparse left-looking QR factorization with numerical column pivoting
   * 
-  * This class implements a left-looking QR descene of sparse matrices
+  * This class implements a left-looking QR decomposition of sparse matrices
   * with numerical column pivoting.
   * When a column has a norm less than a given tolerance
   * it is implicitly permuted to the end. The QR factorization thus obtained is 
@@ -238,7 +238,7 @@ class SparseQR : public SparseSolverBase<SparseQR<_MatrixType,_OrderingType> >
       m_threshold = threshold;
     }
     
-    /** \returns the solution X of \f$ A X = B \f$ using the current descene of A.
+    /** \returns the solution X of \f$ A X = B \f$ using the current decomposition of A.
       *
       * \sa compute()
       */

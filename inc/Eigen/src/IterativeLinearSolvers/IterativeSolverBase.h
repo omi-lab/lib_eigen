@@ -308,7 +308,7 @@ public:
     return m_error;
   }
 
-  /** \returns the solution x of \f$ A x = b \f$ using the current descene of A
+  /** \returns the solution x of \f$ A x = b \f$ using the current decomposition of A
     * and \a x0 as an initial solution.
     *
     * \sa solve(), compute()

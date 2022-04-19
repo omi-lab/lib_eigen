@@ -44,32 +44,32 @@ struct enable_if_ref<Ref<T>,Derived> {
   *
   * \class PartialPivLU
   *
-  * \brief LU descene of a matrix with partial pivoting, and related features
+  * \brief LU decomposition of a matrix with partial pivoting, and related features
   *
-  * \tparam _MatrixType the type of the matrix of which we are computing the LU descene
+  * \tparam _MatrixType the type of the matrix of which we are computing the LU decomposition
   *
-  * This class represents a LU descene of a \b square \b invertible matrix, with partial pivoting: the matrix A
+  * This class represents a LU decomposition of a \b square \b invertible matrix, with partial pivoting: the matrix A
   * is decomposed as A = PLU where L is unit-lower-triangular, U is upper-triangular, and P
   * is a permutation matrix.
   *
-  * Typically, partial pivoting LU descene is only considered numerically stable for square invertible
+  * Typically, partial pivoting LU decomposition is only considered numerically stable for square invertible
   * matrices. Thus LAPACK's dgesv and dgesvx require the matrix to be square and invertible. The present class
   * does the same. It will assert that the matrix is square, but it won't (actually it can't) check that the
-  * matrix is invertible: it is your task to check that you only use this descene on invertible matrices.
+  * matrix is invertible: it is your task to check that you only use this decomposition on invertible matrices.
   *
-  * The guaranteed safe alternative, working for all matrices, is the full pivoting LU descene, provided
+  * The guaranteed safe alternative, working for all matrices, is the full pivoting LU decomposition, provided
   * by class FullPivLU.
   *
-  * This is \b not a rank-revealing LU descene. Many features are intentionally absent from this class,
+  * This is \b not a rank-revealing LU decomposition. Many features are intentionally absent from this class,
   * such as rank computation. If you need these features, use class FullPivLU.
   *
-  * This LU descene is suitable to invert invertible matrices. It is what MatrixBase::inverse() uses
+  * This LU decomposition is suitable to invert invertible matrices. It is what MatrixBase::inverse() uses
   * in the general case.
   * On the other hand, it is \b not suitable to determine whether a given matrix is invertible.
   *
-  * The data of the LU descene can be directly accessed through the methods matrixLU(), permutationP().
+  * The data of the LU decomposition can be directly accessed through the methods matrixLU(), permutationP().
   *
-  * This class supports the \link InplaceDecomposition inplace descene \endlink mechanism.
+  * This class supports the \link InplaceDecomposition inplace decomposition \endlink mechanism.
   * 
   * \sa MatrixBase::partialPivLu(), MatrixBase::determinant(), MatrixBase::inverse(), MatrixBase::computeInverse(), class FullPivLU
   */
@@ -95,7 +95,7 @@ template<typename _MatrixType> class PartialPivLU
       * \brief Default Constructor.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform descenes via PartialPivLU::compute(const MatrixType&).
+      * perform decompositions via PartialPivLU::compute(const MatrixType&).
       */
     PartialPivLU();
 
@@ -109,7 +109,7 @@ template<typename _MatrixType> class PartialPivLU
 
     /** Constructor.
       *
-      * \param matrix the matrix of which to compute the LU descene.
+      * \param matrix the matrix of which to compute the LU decomposition.
       *
       * \warning The matrix should have full rank (e.g. if it's square, it should be invertible).
       * If you need to deal with non-full rank, use class FullPivLU instead.
@@ -117,9 +117,9 @@ template<typename _MatrixType> class PartialPivLU
     template<typename InputType>
     explicit PartialPivLU(const EigenBase<InputType>& matrix);
 
-    /** Constructor for \link InplaceDecomposition inplace descene \endlink
+    /** Constructor for \link InplaceDecomposition inplace decomposition \endlink
       *
-      * \param matrix the matrix of which to compute the LU descene.
+      * \param matrix the matrix of which to compute the LU decomposition.
       *
       * \warning The matrix should have full rank (e.g. if it's square, it should be invertible).
       * If you need to deal with non-full rank, use class FullPivLU instead.
@@ -134,7 +134,7 @@ template<typename _MatrixType> class PartialPivLU
       return *this;
     }
 
-    /** \returns the LU descene matrix: the upper-triangular part is U, the
+    /** \returns the LU decomposition matrix: the upper-triangular part is U, the
       * unit-lower-triangular part is L (at least for square matrices; in the non-square
       * case, special care is needed, see the documentation of class FullPivLU).
       *
@@ -156,11 +156,11 @@ template<typename _MatrixType> class PartialPivLU
 
     #ifdef EIGEN_PARSED_BY_DOXYGEN
     /** This method returns the solution x to the equation Ax=b, where A is the matrix of which
-      * *this is the LU descene.
+      * *this is the LU decomposition.
       *
       * \param b the right-hand-side of the equation to solve. Can be a vector or a matrix,
       *          the only requirement in order for the equation to make sense is that
-      *          b.rows()==A.rows(), where A is the matrix of which *this is the LU descene.
+      *          b.rows()==A.rows(), where A is the matrix of which *this is the LU decomposition.
       *
       * \returns the solution.
       *
@@ -178,7 +178,7 @@ template<typename _MatrixType> class PartialPivLU
     #endif
 
     /** \returns an estimate of the reciprocal condition number of the matrix of which \c *this is
-        the LU descene.
+        the LU decomposition.
       */
     inline RealScalar rcond() const
     {
@@ -186,7 +186,7 @@ template<typename _MatrixType> class PartialPivLU
       return internal::rcond_estimate_helper(m_l1_norm, *this);
     }
 
-    /** \returns the inverse of the matrix of which *this is the LU descene.
+    /** \returns the inverse of the matrix of which *this is the LU decomposition.
       *
       * \warning The matrix being decomposed here is assumed to be invertible. If you need to check for
       *          invertibility, use class FullPivLU instead.
@@ -200,9 +200,9 @@ template<typename _MatrixType> class PartialPivLU
     }
 
     /** \returns the determinant of the matrix of which
-      * *this is the LU descene. It has only linear complexity
+      * *this is the LU decomposition. It has only linear complexity
       * (that is, O(n) where n is the dimension of the square matrix)
-      * as the LU descene has already been computed.
+      * as the LU decomposition has already been computed.
       *
       * \note For fixed-size matrices of size up to 4, MatrixBase::determinant() offers
       *       optimized paths.
@@ -223,7 +223,7 @@ template<typename _MatrixType> class PartialPivLU
     template<typename RhsType, typename DstType>
     EIGEN_DEVICE_FUNC
     void _solve_impl(const RhsType &rhs, DstType &dst) const {
-     /* The descene PA = LU can be rewritten as A = P^{-1} L U.
+     /* The decomposition PA = LU can be rewritten as A = P^{-1} L U.
       * So we proceed as follows:
       * Step 1: compute c = Pb.
       * Step 2: replace c by the solution x to Lx = c.
@@ -243,7 +243,7 @@ template<typename _MatrixType> class PartialPivLU
     template<bool Conjugate, typename RhsType, typename DstType>
     EIGEN_DEVICE_FUNC
     void _solve_impl_transposed(const RhsType &rhs, DstType &dst) const {
-     /* The descene PA = LU can be rewritten as A^T = U^T L^T P.
+     /* The decomposition PA = LU can be rewritten as A^T = U^T L^T P.
       * So we proceed as follows:
       * Step 1: compute c as the solution to L^T c = b
       * Step 2: replace c by the solution x to U^T x = c.
@@ -345,7 +345,7 @@ struct partial_lu_impl
   typedef Ref<Matrix<Scalar, Dynamic, Dynamic, StorageOrder> > BlockType;
   typedef typename MatrixType::RealScalar RealScalar;
 
-  /** \internal performs the LU descene in-place of the matrix \a lu
+  /** \internal performs the LU decomposition in-place of the matrix \a lu
     * using an unblocked algorithm.
     *
     * In addition, this function returns the row transpositions in the
@@ -412,7 +412,7 @@ struct partial_lu_impl
     return first_zero_pivot;
   }
 
-  /** \internal performs the LU descene in-place of the matrix represented
+  /** \internal performs the LU decomposition in-place of the matrix represented
     * by the variables \a rows, \a cols, \a lu_data, and \a lu_stride using a
     * recursive, blocked algorithm.
     *
@@ -499,7 +499,7 @@ struct partial_lu_impl
   }
 };
 
-/** \internal performs the LU descene with partial pivoting in-place.
+/** \internal performs the LU decomposition with partial pivoting in-place.
   */
 template<typename MatrixType, typename TranspositionType>
 void partial_lu_inplace(MatrixType& lu, TranspositionType& row_transpositions, typename TranspositionType::StorageIndex& nb_transpositions)
@@ -550,7 +550,7 @@ typename PartialPivLU<MatrixType>::Scalar PartialPivLU<MatrixType>::determinant(
   return Scalar(m_det_p) * m_lu.diagonal().prod();
 }
 
-/** \returns the matrix represented by the descene,
+/** \returns the matrix represented by the decomposition,
  * i.e., it returns the product: P^{-1} L U.
  * This function is provided for debug purpose. */
 template<typename MatrixType>
@@ -588,7 +588,7 @@ struct Assignment<DstXprType, Inverse<PartialPivLU<MatrixType> >, internal::assi
 
 /** \lu_module
   *
-  * \return the partial-pivoting LU descene of \c *this.
+  * \return the partial-pivoting LU decomposition of \c *this.
   *
   * \sa class PartialPivLU
   */
@@ -603,7 +603,7 @@ MatrixBase<Derived>::partialPivLu() const
   *
   * Synonym of partialPivLu().
   *
-  * \return the partial-pivoting LU descene of \c *this.
+  * \return the partial-pivoting LU decomposition of \c *this.
   *
   * \sa class PartialPivLU
   */

@@ -33,7 +33,7 @@ struct rcond_compute_sign<Vector, Vector, false> {
 };
 
 /**
-  * \returns an estimate of ||inv(matrix)||_1 given a descene of
+  * \returns an estimate of ||inv(matrix)||_1 given a decomposition of
   * \a matrix that implements .solve() and .adjoint().solve() methods.
   *
   * This function implements Algorithms 4.1 and 5.1 from
@@ -47,7 +47,7 @@ struct rcond_compute_sign<Vector, Vector, false> {
   * ||matrix||_1 * ||inv(matrix)||_1. The first term ||matrix||_1 can be
   * computed directly in O(n^2) operations.
   *
-  * Supports the following descenes: FullPivLU, PartialPivLU, LDLT, and
+  * Supports the following decompositions: FullPivLU, PartialPivLU, LDLT, and
   * LLT.
   *
   * \sa FullPivLU, PartialPivLU, LDLT, LLT.
@@ -143,13 +143,13 @@ typename Decomposition::RealScalar rcond_invmatrix_L1_norm_estimate(const Decomp
 
 /** \brief Reciprocal condition number estimator.
   *
-  * Computing a descene of a dense matrix takes O(n^3) operations, while
+  * Computing a decomposition of a dense matrix takes O(n^3) operations, while
   * this method estimates the condition number quickly and reliably in O(n^2)
   * operations.
   *
   * \returns an estimate of the reciprocal condition number
   * (1 / (||matrix||_1 * ||inv(matrix)||_1)) of matrix, given ||matrix||_1 and
-  * its descene. Supports the following descenes: FullPivLU,
+  * its decomposition. Supports the following decompositions: FullPivLU,
   * PartialPivLU, LDLT, and LLT.
   *
   * \sa FullPivLU, PartialPivLU, LDLT, LLT.

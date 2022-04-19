@@ -17,8 +17,8 @@
   *
   *
   *
-  * This module provides two variants of the Cholesky descene for selfadjoint (hermitian) matrices.
-  * Those descenes are also accessible via the following methods:
+  * This module provides two variants of the Cholesky decomposition for selfadjoint (hermitian) matrices.
+  * Those decompositions are also accessible via the following methods:
   *  - MatrixBase::llt()
   *  - MatrixBase::ldlt()
   *  - SelfAdjointView::llt()

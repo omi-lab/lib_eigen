@@ -1076,7 +1076,7 @@ template<> struct transform_rotation_impl<Isometry> {
   *
   * If Mode==Isometry, then this method is an alias for linear(),
   * otherwise it calls computeRotationScaling() to extract the rotation
-  * through a SVD descene.
+  * through a SVD decomposition.
   *
   * \svd_module
   *

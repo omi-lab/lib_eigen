@@ -31,23 +31,23 @@ struct traits<HessenbergDecompositionMatrixHReturnType<MatrixType> >
   *
   * \brief Reduces a square matrix to Hessenberg form by an orthogonal similarity transformation
   *
-  * \tparam _MatrixType the type of the matrix of which we are computing the Hessenberg descene
+  * \tparam _MatrixType the type of the matrix of which we are computing the Hessenberg decomposition
   *
-  * This class performs an Hessenberg descene of a matrix \f$ A \f$. In
-  * the real case, the Hessenberg descene consists of an orthogonal
+  * This class performs an Hessenberg decomposition of a matrix \f$ A \f$. In
+  * the real case, the Hessenberg decomposition consists of an orthogonal
   * matrix \f$ Q \f$ and a Hessenberg matrix \f$ H \f$ such that \f$ A = Q H
   * Q^T \f$. An orthogonal matrix is a matrix whose inverse equals its
   * transpose (\f$ Q^{-1} = Q^T \f$). A Hessenberg matrix has zeros below the
-  * subdiagonal, so it is almost upper triangular. The Hessenberg descene
+  * subdiagonal, so it is almost upper triangular. The Hessenberg decomposition
   * of a complex matrix is \f$ A = Q H Q^* \f$ with \f$ Q \f$ unitary (that is,
   * \f$ Q^{-1} = Q^* \f$).
   *
-  * Call the function compute() to compute the Hessenberg descene of a
+  * Call the function compute() to compute the Hessenberg decomposition of a
   * given matrix. Alternatively, you can use the
   * HessenbergDecomposition(const MatrixType&) constructor which computes the
-  * Hessenberg descene at construction time. Once the descene is
+  * Hessenberg decomposition at construction time. Once the decomposition is
   * computed, you can use the matrixH() and matrixQ() functions to construct
-  * the matrices H and Q in the descene.
+  * the matrices H and Q in the decomposition.
   *
   * The documentation for matrixH() contains an example of the typical use of
   * this class.
@@ -86,12 +86,12 @@ template<typename _MatrixType> class HessenbergDecomposition
     
     typedef internal::HessenbergDecompositionMatrixHReturnType<MatrixType> MatrixHReturnType;
 
-    /** \brief Default constructor; the descene will be computed later.
+    /** \brief Default constructor; the decomposition will be computed later.
       *
-      * \param [in] size  The size of the matrix whose Hessenberg descene will be computed.
+      * \param [in] size  The size of the matrix whose Hessenberg decomposition will be computed.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform descenes via compute().  The \p size parameter is only
+      * perform decompositions via compute().  The \p size parameter is only
       * used as a hint. It is not an error to give a wrong \p size, but it may
       * impair performance.
       *
@@ -106,12 +106,12 @@ template<typename _MatrixType> class HessenbergDecomposition
         m_hCoeffs.resize(size-1);
     }
 
-    /** \brief Constructor; computes Hessenberg descene of given matrix.
+    /** \brief Constructor; computes Hessenberg decomposition of given matrix.
       *
-      * \param[in]  matrix  Square matrix whose Hessenberg descene is to be computed.
+      * \param[in]  matrix  Square matrix whose Hessenberg decomposition is to be computed.
       *
       * This constructor calls compute() to compute the Hessenberg
-      * descene.
+      * decomposition.
       *
       * \sa matrixH() for an example.
       */
@@ -131,12 +131,12 @@ template<typename _MatrixType> class HessenbergDecomposition
       m_isInitialized = true;
     }
 
-    /** \brief Computes Hessenberg descene of given matrix.
+    /** \brief Computes Hessenberg decomposition of given matrix.
       *
-      * \param[in]  matrix  Square matrix whose Hessenberg descene is to be computed.
+      * \param[in]  matrix  Square matrix whose Hessenberg decomposition is to be computed.
       * \returns    Reference to \c *this
       *
-      * The Hessenberg descene is computed by bringing the columns of the
+      * The Hessenberg decomposition is computed by bringing the columns of the
       * matrix successively in the required form using Householder reflections
       * (see, e.g., Algorithm 7.4.2 in Golub \& Van Loan, <i>%Matrix
       * Computations</i>). The cost is \f$ 10n^3/3 \f$ flops, where \f$ n \f$
@@ -169,10 +169,10 @@ template<typename _MatrixType> class HessenbergDecomposition
       *
       * \pre Either the constructor HessenbergDecomposition(const MatrixType&)
       * or the member function compute(const MatrixType&) has been called
-      * before to compute the Hessenberg descene of a matrix.
+      * before to compute the Hessenberg decomposition of a matrix.
       *
       * The Householder coefficients allow the reconstruction of the matrix
-      * \f$ Q \f$ in the Hessenberg descene from the packed data.
+      * \f$ Q \f$ in the Hessenberg decomposition from the packed data.
       *
       * \sa packedMatrix(), \ref Householder_Module "Householder module"
       */
@@ -182,14 +182,14 @@ template<typename _MatrixType> class HessenbergDecomposition
       return m_hCoeffs;
     }
 
-    /** \brief Returns the internal representation of the descene
+    /** \brief Returns the internal representation of the decomposition
       *
       *	\returns a const reference to a matrix with the internal representation
-      *	         of the descene.
+      *	         of the decomposition.
       *
       * \pre Either the constructor HessenbergDecomposition(const MatrixType&)
       * or the member function compute(const MatrixType&) has been called
-      * before to compute the Hessenberg descene of a matrix.
+      * before to compute the Hessenberg decomposition of a matrix.
       *
       * The returned matrix contains the following information:
       *  - the upper part and lower sub-diagonal represent the Hessenberg matrix H
@@ -217,13 +217,13 @@ template<typename _MatrixType> class HessenbergDecomposition
       return m_matrix;
     }
 
-    /** \brief Reconstructs the orthogonal matrix Q in the descene
+    /** \brief Reconstructs the orthogonal matrix Q in the decomposition
       *
       * \returns object representing the matrix Q
       *
       * \pre Either the constructor HessenbergDecomposition(const MatrixType&)
       * or the member function compute(const MatrixType&) has been called
-      * before to compute the Hessenberg descene of a matrix.
+      * before to compute the Hessenberg decomposition of a matrix.
       *
       * This function returns a light-weight object of template class
       * HouseholderSequence. You can either apply it directly to a matrix or
@@ -239,13 +239,13 @@ template<typename _MatrixType> class HessenbergDecomposition
              .setShift(1);
     }
 
-    /** \brief Constructs the Hessenberg matrix H in the descene
+    /** \brief Constructs the Hessenberg matrix H in the decomposition
       *
       * \returns expression object representing the matrix H
       *
       * \pre Either the constructor HessenbergDecomposition(const MatrixType&)
       * or the member function compute(const MatrixType&) has been called
-      * before to compute the Hessenberg descene of a matrix.
+      * before to compute the Hessenberg decomposition of a matrix.
       *
       * The object returned by this function constructs the Hessenberg matrix H
       * when it is assigned to a matrix or otherwise evaluated. The matrix H is
@@ -279,7 +279,7 @@ template<typename _MatrixType> class HessenbergDecomposition
 };
 
 /** \internal
-  * Performs a tridiagonal descene of \a matA in place.
+  * Performs a tridiagonal decomposition of \a matA in place.
   *
   * \param matA the input selfadjoint matrix
   * \param hCoeffs returned Householder coefficients
@@ -326,10 +326,10 @@ namespace internal {
   *
   * \brief Expression type for return value of HessenbergDecomposition::matrixH()
   *
-  * \tparam MatrixType type of matrix in the Hessenberg descene
+  * \tparam MatrixType type of matrix in the Hessenberg decomposition
   *
   * Objects of this type represent the Hessenberg matrix in the Hessenberg
-  * descene of some matrix. The object holds a reference to the
+  * decomposition of some matrix. The object holds a reference to the
   * HessenbergDecomposition class until the it is assigned or evaluated for
   * some other reason (the reference should remain valid during the life time
   * of this object). This class is the return type of
@@ -342,13 +342,13 @@ template<typename MatrixType> struct HessenbergDecompositionMatrixHReturnType
   public:
     /** \brief Constructor.
       *
-      * \param[in] hess  Hessenberg descene
+      * \param[in] hess  Hessenberg decomposition
       */
     HessenbergDecompositionMatrixHReturnType(const HessenbergDecomposition<MatrixType>& hess) : m_hess(hess) { }
 
-    /** \brief Hessenberg matrix in descene.
+    /** \brief Hessenberg matrix in decomposition.
       *
-      * \param[out] result  Hessenberg matrix in descene \p hess which
+      * \param[out] result  Hessenberg matrix in decomposition \p hess which
       *                     was passed to the constructor
       */
     template <typename ResultType>

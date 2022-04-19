@@ -38,11 +38,11 @@ struct traits<FullPivHouseholderQRMatrixQReturnType<MatrixType> >
   *
   * \class FullPivHouseholderQR
   *
-  * \brief Householder rank-revealing QR descene of a matrix with full pivoting
+  * \brief Householder rank-revealing QR decomposition of a matrix with full pivoting
   *
-  * \tparam _MatrixType the type of the matrix of which we are computing the QR descene
+  * \tparam _MatrixType the type of the matrix of which we are computing the QR decomposition
   *
-  * This class performs a rank-revealing QR descene of a matrix \b A into matrices \b P, \b P', \b Q and \b R
+  * This class performs a rank-revealing QR decomposition of a matrix \b A into matrices \b P, \b P', \b Q and \b R
   * such that 
   * \f[
   *  \mathbf{P} \, \mathbf{A} \, \mathbf{P}' = \mathbf{Q} \, \mathbf{R}
@@ -50,10 +50,10 @@ struct traits<FullPivHouseholderQRMatrixQReturnType<MatrixType> >
   * by using Householder transformations. Here, \b P and \b P' are permutation matrices, \b Q a unitary matrix 
   * and \b R an upper triangular matrix.
   *
-  * This descene performs a very prudent full pivoting in order to be rank-revealing and achieve optimal
+  * This decomposition performs a very prudent full pivoting in order to be rank-revealing and achieve optimal
   * numerical stability. The trade-off is that it is slower than HouseholderQR and ColPivHouseholderQR.
   *
-  * This class supports the \link InplaceDecomposition inplace descene \endlink mechanism.
+  * This class supports the \link InplaceDecomposition inplace decomposition \endlink mechanism.
   * 
   * \sa MatrixBase::fullPivHouseholderQr()
   */
@@ -84,7 +84,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
     /** \brief Default Constructor.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform descenes via FullPivHouseholderQR::compute(const MatrixType&).
+      * perform decompositions via FullPivHouseholderQR::compute(const MatrixType&).
       */
     FullPivHouseholderQR()
       : m_qr(),
@@ -140,7 +140,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
 
     /** \brief Constructs a QR factorization from a given matrix
       *
-      * This overloaded constructor is provided for \link InplaceDecomposition inplace descene \endlink when \c MatrixType is a Eigen::Ref.
+      * This overloaded constructor is provided for \link InplaceDecomposition inplace decomposition \endlink when \c MatrixType is a Eigen::Ref.
       *
       * \sa FullPivHouseholderQR(const EigenBase&)
       */
@@ -160,7 +160,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
 
     #ifdef EIGEN_PARSED_BY_DOXYGEN
     /** This method finds a solution x to the equation Ax=b, where A is the matrix of which
-      * \c *this is the QR descene.
+      * \c *this is the QR decomposition.
       *
       * \param b the right-hand-side of the equation to solve.
       *
@@ -183,7 +183,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
       */
     MatrixQReturnType matrixQ(void) const;
 
-    /** \returns a reference to the matrix where the Householder QR descene is stored
+    /** \returns a reference to the matrix where the Householder QR decomposition is stored
       */
     const MatrixType& matrixQR() const
     {
@@ -209,9 +209,9 @@ template<typename _MatrixType> class FullPivHouseholderQR
     }
 
     /** \returns the absolute value of the determinant of the matrix of which
-      * *this is the QR descene. It has only linear complexity
+      * *this is the QR decomposition. It has only linear complexity
       * (that is, O(n) where n is the dimension of the square matrix)
-      * as the QR descene has already been computed.
+      * as the QR decomposition has already been computed.
       *
       * \note This is only for square matrices.
       *
@@ -224,9 +224,9 @@ template<typename _MatrixType> class FullPivHouseholderQR
     typename MatrixType::RealScalar absDeterminant() const;
 
     /** \returns the natural log of the absolute value of the determinant of the matrix of which
-      * *this is the QR descene. It has only linear complexity
+      * *this is the QR decomposition. It has only linear complexity
       * (that is, O(n) where n is the dimension of the square matrix)
-      * as the QR descene has already been computed.
+      * as the QR decomposition has already been computed.
       *
       * \note This is only for square matrices.
       *
@@ -237,7 +237,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
       */
     typename MatrixType::RealScalar logAbsDeterminant() const;
 
-    /** \returns the rank of the matrix of which *this is the QR descene.
+    /** \returns the rank of the matrix of which *this is the QR decomposition.
       *
       * \note This method has to determine which pivots should be considered nonzero.
       *       For that, it uses the threshold value that you can control by calling
@@ -254,7 +254,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
       return result;
     }
 
-    /** \returns the dimension of the kernel of the matrix of which *this is the QR descene.
+    /** \returns the dimension of the kernel of the matrix of which *this is the QR decomposition.
       *
       * \note This method has to determine which pivots should be considered nonzero.
       *       For that, it uses the threshold value that you can control by calling
@@ -266,7 +266,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
       return cols() - rank();
     }
 
-    /** \returns true if the matrix of which *this is the QR descene represents an injective
+    /** \returns true if the matrix of which *this is the QR decomposition represents an injective
       *          linear map, i.e. has trivial kernel; false otherwise.
       *
       * \note This method has to determine which pivots should be considered nonzero.
@@ -279,7 +279,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
       return rank() == cols();
     }
 
-    /** \returns true if the matrix of which *this is the QR descene represents a surjective
+    /** \returns true if the matrix of which *this is the QR decomposition represents a surjective
       *          linear map; false otherwise.
       *
       * \note This method has to determine which pivots should be considered nonzero.
@@ -292,7 +292,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
       return rank() == rows();
     }
 
-    /** \returns true if the matrix of which *this is the QR descene is invertible.
+    /** \returns true if the matrix of which *this is the QR decomposition is invertible.
       *
       * \note This method has to determine which pivots should be considered nonzero.
       *       For that, it uses the threshold value that you can control by calling
@@ -304,7 +304,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
       return isInjective() && isSurjective();
     }
 
-    /** \returns the inverse of the matrix of which *this is the QR descene.
+    /** \returns the inverse of the matrix of which *this is the QR decomposition.
       *
       * \note If this matrix is not invertible, the returned matrix has undefined coefficients.
       *       Use isInvertible() to first determine whether this matrix is invertible.
@@ -326,7 +326,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
 
     /** Allows to prescribe a threshold to be used by certain methods, such as rank(),
       * who need to determine when pivots are to be considered nonzero. This is not used for the
-      * QR descene itself.
+      * QR decomposition itself.
       *
       * When it needs to get the threshold value, Eigen calls threshold(). By default, this
       * uses a formula to automatically determine a reasonable threshold.
@@ -375,7 +375,7 @@ template<typename _MatrixType> class FullPivHouseholderQR
                                       : NumTraits<Scalar>::epsilon() * RealScalar(m_qr.diagonalSize());
     }
 
-    /** \returns the number of nonzero pivots in the QR descene.
+    /** \returns the number of nonzero pivots in the QR decomposition.
       * Here nonzero is meant in the exact sense, not in a fuzzy sense.
       * So that notion isn't really intrinsically interesting, but it is
       * still useful when implementing algorithms.
@@ -697,7 +697,7 @@ inline typename FullPivHouseholderQR<MatrixType>::MatrixQReturnType FullPivHouse
   return MatrixQReturnType(m_qr, m_hCoeffs, m_rows_transpositions);
 }
 
-/** \return the full-pivoting Householder QR descene of \c *this.
+/** \return the full-pivoting Householder QR decomposition of \c *this.
   *
   * \sa class FullPivHouseholderQR
   */

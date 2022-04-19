@@ -20,27 +20,27 @@ namespace Eigen {
   *
   * \class RealSchur
   *
-  * \brief Performs a real Schur descene of a square matrix
+  * \brief Performs a real Schur decomposition of a square matrix
   *
   * \tparam _MatrixType the type of the matrix of which we are computing the
-  * real Schur descene; this is expected to be an instantiation of the
+  * real Schur decomposition; this is expected to be an instantiation of the
   * Matrix class template.
   *
   * Given a real square matrix A, this class computes the real Schur
-  * descene: \f$ A = U T U^T \f$ where U is a real orthogonal matrix and
+  * decomposition: \f$ A = U T U^T \f$ where U is a real orthogonal matrix and
   * T is a real quasi-triangular matrix. An orthogonal matrix is a matrix whose
   * inverse is equal to its transpose, \f$ U^{-1} = U^T \f$. A quasi-triangular
   * matrix is a block-triangular matrix whose diagonal consists of 1-by-1
   * blocks and 2-by-2 blocks with complex eigenvalues. The eigenvalues of the
   * blocks on the diagonal of T are the same as the eigenvalues of the matrix
-  * A, and thus the real Schur descene is used in EigenSolver to compute
-  * the eigendescene of a matrix.
+  * A, and thus the real Schur decomposition is used in EigenSolver to compute
+  * the eigendecomposition of a matrix.
   *
-  * Call the function compute() to compute the real Schur descene of a
+  * Call the function compute() to compute the real Schur decomposition of a
   * given matrix. Alternatively, you can use the RealSchur(const MatrixType&, bool)
-  * constructor which computes the real Schur descene at construction
-  * time. Once the descene is computed, you can use the matrixU() and
-  * matrixT() functions to retrieve the matrices U and T in the descene.
+  * constructor which computes the real Schur decomposition at construction
+  * time. Once the decomposition is computed, you can use the matrixU() and
+  * matrixT() functions to retrieve the matrices U and T in the decomposition.
   *
   * The documentation of RealSchur(const MatrixType&, bool) contains an example
   * of the typical use of this class.
@@ -71,10 +71,10 @@ template<typename _MatrixType> class RealSchur
 
     /** \brief Default constructor.
       *
-      * \param [in] size  Positive integer, size of the matrix whose Schur descene will be computed.
+      * \param [in] size  Positive integer, size of the matrix whose Schur decomposition will be computed.
       *
       * The default constructor is useful in cases in which the user intends to
-      * perform descenes via compute().  The \p size parameter is only
+      * perform decompositions via compute().  The \p size parameter is only
       * used as a hint. It is not an error to give a wrong \p size, but it may
       * impair performance.
       *
@@ -90,12 +90,12 @@ template<typename _MatrixType> class RealSchur
               m_maxIters(-1)
     { }
 
-    /** \brief Constructor; computes real Schur descene of given matrix. 
+    /** \brief Constructor; computes real Schur decomposition of given matrix. 
       * 
-      * \param[in]  matrix    Square matrix whose Schur descene is to be computed.
+      * \param[in]  matrix    Square matrix whose Schur decomposition is to be computed.
       * \param[in]  computeU  If true, both T and U are computed; if false, only T is computed.
       *
-      * This constructor calls compute() to compute the Schur descene.
+      * This constructor calls compute() to compute the Schur decomposition.
       *
       * Example: \include RealSchur_RealSchur_MatrixType.cpp
       * Output: \verbinclude RealSchur_RealSchur_MatrixType.out
@@ -113,13 +113,13 @@ template<typename _MatrixType> class RealSchur
       compute(matrix.derived(), computeU);
     }
 
-    /** \brief Returns the orthogonal matrix in the Schur descene. 
+    /** \brief Returns the orthogonal matrix in the Schur decomposition. 
       *
       * \returns A const reference to the matrix U.
       *
       * \pre Either the constructor RealSchur(const MatrixType&, bool) or the
       * member function compute(const MatrixType&, bool) has been called before
-      * to compute the Schur descene of a matrix, and \p computeU was set
+      * to compute the Schur decomposition of a matrix, and \p computeU was set
       * to true (the default value).
       *
       * \sa RealSchur(const MatrixType&, bool) for an example
@@ -127,17 +127,17 @@ template<typename _MatrixType> class RealSchur
     const MatrixType& matrixU() const
     {
       eigen_assert(m_isInitialized && "RealSchur is not initialized.");
-      eigen_assert(m_matUisUptodate && "The matrix U has not been computed during the RealSchur descene.");
+      eigen_assert(m_matUisUptodate && "The matrix U has not been computed during the RealSchur decomposition.");
       return m_matU;
     }
 
-    /** \brief Returns the quasi-triangular matrix in the Schur descene. 
+    /** \brief Returns the quasi-triangular matrix in the Schur decomposition. 
       *
       * \returns A const reference to the matrix T.
       *
       * \pre Either the constructor RealSchur(const MatrixType&, bool) or the
       * member function compute(const MatrixType&, bool) has been called before
-      * to compute the Schur descene of a matrix.
+      * to compute the Schur decomposition of a matrix.
       *
       * \sa RealSchur(const MatrixType&, bool) for an example
       */
@@ -147,17 +147,17 @@ template<typename _MatrixType> class RealSchur
       return m_matT;
     }
   
-    /** \brief Computes Schur descene of given matrix. 
+    /** \brief Computes Schur decomposition of given matrix. 
       * 
-      * \param[in]  matrix    Square matrix whose Schur descene is to be computed.
+      * \param[in]  matrix    Square matrix whose Schur decomposition is to be computed.
       * \param[in]  computeU  If true, both T and U are computed; if false, only T is computed.
       * \returns    Reference to \c *this
       *
-      * The Schur descene is computed by first reducing the matrix to
+      * The Schur decomposition is computed by first reducing the matrix to
       * Hessenberg form using the class HessenbergDecomposition. The Hessenberg
       * matrix is then reduced to triangular form by performing Francis QR
       * iterations with implicit double shift. The cost of computing the Schur
-      * descene depends on the number of iterations; as a rough guide, it
+      * decomposition depends on the number of iterations; as a rough guide, it
       * may be taken to be \f$25n^3\f$ flops if \a computeU is true and
       * \f$10n^3\f$ flops if \a computeU is false.
       *
@@ -169,7 +169,7 @@ template<typename _MatrixType> class RealSchur
     template<typename InputType>
     RealSchur& compute(const EigenBase<InputType>& matrix, bool computeU = true);
 
-    /** \brief Computes Schur descene of a Hessenberg matrix H = Z T Z^T
+    /** \brief Computes Schur decomposition of a Hessenberg matrix H = Z T Z^T
      *  \param[in] matrixH Matrix in Hessenberg form H
      *  \param[in] matrixQ orthogonal matrix Q that transform a matrix A to H : A = Q H Q^T
      *  \param computeU Computes the matriX U of the Schur vectors
@@ -177,7 +177,7 @@ template<typename _MatrixType> class RealSchur
      * 
      *  This routine assumes that the matrix is already reduced in Hessenberg form matrixH
      *  using either the class HessenbergDecomposition or another mean.
-     *  It computes the upper quasi-triangular matrix T of the Schur descene of H
+     *  It computes the upper quasi-triangular matrix T of the Schur decomposition of H
      *  When computeU is true, this routine computes the matrix U such that 
      *  A = U T U^T =  (QZ) T (QZ)^T = Q H Q^T where A is the initial matrix
      * 
