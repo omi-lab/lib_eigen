@@ -143,7 +143,6 @@ template<> struct is_integral<unsigned __int64>       { enum { value = true }; }
 #if EIGEN_HAS_CXX11
 using std::make_unsigned;
 #else
-// TODO: Possibly improve this implementation of make_unsigned.
 // It is currently used only by
 // template<typename Scalar> struct random_default_impl<Scalar, false, true>.
 template<typename> struct make_unsigned;

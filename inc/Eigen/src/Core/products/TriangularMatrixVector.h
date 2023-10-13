@@ -198,8 +198,6 @@ struct triangular_product_impl<Mode,false,Lhs,true,Rhs,false>
 } // end namespace internal
 
 namespace internal {
-
-// TODO: find a way to factorize this piece of code with gemv_selector since the logic is exactly the same.
   
 template<int Mode> struct trmv_selector<Mode,ColMajor>
 {

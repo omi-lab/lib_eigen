@@ -249,7 +249,6 @@ void evaluateProductBlockingSizesHeuristic(Index& k, Index& m, Index& n, Index n
     {
       // So far, no blocking at all, i.e., kc==k, and nc==n.
       // In this case, let's perform a blocking over the rows such that the packed lhs data is kept in cache L1/L2
-      // TODO: part of this blocking strategy is now implemented within the kernel itself, so the L1-based heuristic here should be obsolete.
       Index problem_size = k*n*sizeof(LhsScalar);
       Index actual_lm = actual_l2;
       Index max_mc = m;

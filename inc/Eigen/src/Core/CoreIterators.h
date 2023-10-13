@@ -26,8 +26,7 @@ class inner_iterator_selector;
   * \brief An InnerIterator allows to loop over the element of any matrix expression.
   * 
   * \warning To be used with care because an evaluator is constructed every time an InnerIterator iterator is constructed.
-  * 
-  * TODO: add a usage example
+  *
   */
 template<typename XprType>
 class InnerIterator

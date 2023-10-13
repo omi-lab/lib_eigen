@@ -241,7 +241,6 @@ struct inplace_transpose_selector<MatrixType,true,false> { // square matrix
   }
 };
 
-// TODO: vectorized path is currently limited to LargestPacketSize x LargestPacketSize cases only.
 template<typename MatrixType>
 struct inplace_transpose_selector<MatrixType,true,true> { // PacketSize x PacketSize
   static void run(MatrixType& m) {

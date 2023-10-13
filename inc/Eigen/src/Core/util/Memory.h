@@ -583,7 +583,6 @@ template<typename T> struct smart_memmove_helper<T,false> {
 // With clang -Oz -mthumb, alloca changes the stack pointer in a way that is
 // not allowed in Thumb2. -DEIGEN_STACK_ALLOCATION_LIMIT=0 doesn't work because
 // the compiler still emits bad code because stack allocation checks use "<=".
-// TODO: Eliminate after https://bugs.llvm.org/show_bug.cgi?id=23772
 // is fixed.
 #if defined(__clang__) && defined(__thumb__)
   #undef EIGEN_ALLOCA

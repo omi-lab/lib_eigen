@@ -125,7 +125,6 @@ EIGEN_DEVICE_FUNC EIGEN_DONT_INLINE void general_matrix_vector_product<Index,Lhs
   conj_helper<LhsPacketQuarter,RhsPacketQuarter,ConjugateLhs,ConjugateRhs> pcj_quarter;
 
   const Index lhsStride = lhs.stride();
-  // TODO: for padded aligned inputs, we could enable aligned reads
   enum { LhsAlignment = Unaligned,
          ResPacketSize = Traits::ResPacketSize,
          ResPacketSizeHalf = HalfTraits::ResPacketSize,
@@ -143,7 +142,6 @@ EIGEN_DEVICE_FUNC EIGEN_DONT_INLINE void general_matrix_vector_product<Index,Lhs
   const Index n_half = rows-1*ResPacketSizeHalf+1;
   const Index n_quarter = rows-1*ResPacketSizeQuarter+1;
 
-  // TODO: improve the following heuristic:
   const Index block_cols = cols<128 ? cols : (lhsStride*sizeof(LhsScalar)<32000?16:4);
   ResPacket palpha = pset1<ResPacket>(alpha);
   ResPacketHalf palpha_half = pset1<ResPacketHalf>(alpha);
@@ -341,13 +339,10 @@ EIGEN_DEVICE_FUNC EIGEN_DONT_INLINE void general_matrix_vector_product<Index,Lhs
   conj_helper<LhsPacketHalf,RhsPacketHalf,ConjugateLhs,ConjugateRhs> pcj_half;
   conj_helper<LhsPacketQuarter,RhsPacketQuarter,ConjugateLhs,ConjugateRhs> pcj_quarter;
 
-  // TODO: fine tune the following heuristic. The rationale is that if the matrix is very large,
-  //       processing 8 rows at once might be counter productive wrt cache.
   const Index n8 = lhs.stride()*sizeof(LhsScalar)>32000 ? 0 : rows-7;
   const Index n4 = rows-3;
   const Index n2 = rows-1;
 
-  // TODO: for padded aligned inputs, we could enable aligned reads
   enum { LhsAlignment = Unaligned,
          ResPacketSize = Traits::ResPacketSize,
          ResPacketSizeHalf = HalfTraits::ResPacketSize,

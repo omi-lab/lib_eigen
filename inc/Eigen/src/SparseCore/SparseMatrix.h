@@ -912,10 +912,6 @@ protected:
       *     2.b - otherwise, if *this is uncompressed and that the current inner-vector has empty room for at least 1 element, then we perform an in-place insertion.
       *     2.c - otherwise, we'll have to reallocate and copy everything, so instead of doing so for each new element, it is recorded in a std::vector.
       *   3 - at the end, if some entries failed to be inserted in-place, then we alloc a new buffer, copy each chunk at the right position, and insert the new elements.
-      * 
-      * TODO: some piece of code could be isolated and reused for a general in-place update strategy.
-      * TODO: if we start to defer the insertion of some elements (i.e., case 2.c executed once),
-      *       then it *might* be better to disable case 2.b since they will have to be copied anyway.
       */
     template<typename DiagXpr, typename Func>
     void assignDiagonal(const DiagXpr diagXpr, const Func& assignFunc)

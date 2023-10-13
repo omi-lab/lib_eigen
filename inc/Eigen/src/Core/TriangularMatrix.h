@@ -901,12 +901,6 @@ struct triangular_assignment_loop<Kernel, Mode, 0, SetOpposite>
   static inline void run(Kernel &) {}
 };
 
-
-
-// TODO: experiment with a recursive assignment procedure splitting the current
-//       triangular part into one rectangular and two triangular parts.
-
-
 template<typename Kernel, unsigned int Mode, bool SetOpposite>
 struct triangular_assignment_loop<Kernel, Mode, Dynamic, SetOpposite>
 {

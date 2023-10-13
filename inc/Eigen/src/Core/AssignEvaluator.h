@@ -928,7 +928,6 @@ struct Assignment<DstXprType, SrcXprType, Functor, Dense2Dense, Weak>
 };
 
 // Generic assignment through evalTo.
-// TODO: not sure we have to keep that one, but it helps porting current code to new evaluator mechanism.
 // Note that the last template argument "Weak" is needed to make it possible to perform
 // both partial specialization+SFINAE without ambiguous specialization
 template< typename DstXprType, typename SrcXprType, typename Functor, typename Weak>

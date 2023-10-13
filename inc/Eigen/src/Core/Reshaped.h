@@ -266,7 +266,6 @@ struct evaluator<Reshaped<ArgType, Rows, Cols, Order> >
 {
   typedef Reshaped<ArgType, Rows, Cols, Order> XprType;
   typedef typename XprType::Scalar Scalar;
-  // TODO: should check for smaller packet types
   typedef typename packet_traits<Scalar>::type PacketScalar;
 
   enum {
@@ -441,7 +440,6 @@ struct reshaped_evaluator<ArgType, Rows, Cols, Order, /* HasDirectAccess */ true
   EIGEN_DEVICE_FUNC explicit reshaped_evaluator(const XprType& xpr)
     : mapbase_evaluator<XprType, typename XprType::PlainObject>(xpr)
   {
-    // TODO: for the 3.4 release, this should be turned to an internal assertion, but let's keep it as is for the beta lifetime
     eigen_assert(((internal::UIntPtr(xpr.data()) % EIGEN_PLAIN_ENUM_MAX(1,evaluator<XprType>::Alignment)) == 0) && "data is not aligned");
   }
 };

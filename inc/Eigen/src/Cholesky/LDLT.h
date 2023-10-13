@@ -229,7 +229,6 @@ template<typename _MatrixType, int _UpLo> class LDLT
 
     /** \returns the internal LDLT decomposition matrix
       *
-      * TODO: document the storage layout
       */
     inline const MatrixType& matrixLDLT() const
     {

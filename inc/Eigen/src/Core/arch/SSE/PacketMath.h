@@ -191,8 +191,6 @@ template<> struct scalar_div_cost<double,true> { enum { value = 8 }; };
 
 #if EIGEN_COMP_MSVC==1500
 // Workaround MSVC 9 internal compiler error.
-// TODO: It has been detected with win64 builds (amd64), so let's check whether it also happens in 32bits+SSE mode
-// TODO: let's check whether there does not exist a better fix, like adding a pset0() function. (it crashed on pset1(0)).
 template<> EIGEN_STRONG_INLINE Packet4f pset1<Packet4f>(const float&  from) { return _mm_set_ps(from,from,from,from); }
 template<> EIGEN_STRONG_INLINE Packet2d pset1<Packet2d>(const double& from) { return _mm_set_pd(from,from); }
 template<> EIGEN_STRONG_INLINE Packet4i pset1<Packet4i>(const int&    from) { return _mm_set_epi32(from,from,from,from); }

@@ -129,7 +129,6 @@ protected:
 };
 
 // The following three shortcuts are enabled only if the scalar types match exactly.
-// TODO: we could enable them for different scalar types when the product is not vectorized.
 
 // Dense = Product
 template< typename DstXprType, typename Lhs, typename Rhs, int Options, typename Scalar>
@@ -603,7 +602,6 @@ struct product_evaluator<Product<Lhs, Rhs, LazyProduct>, ProductTag, DenseShape,
 
   /* Allow index-based non-packet access. It is impossible though to allow index-based packed access,
    * which is why we don't set the LinearAccessBit.
-   * TODO: this seems possible when the result is a vector
    */
   EIGEN_DEVICE_FUNC EIGEN_STRONG_INLINE
   const CoeffReturnType coeff(Index index) const
@@ -641,7 +639,6 @@ protected:
   LhsEtorType m_lhsImpl;
   RhsEtorType m_rhsImpl;
 
-  // TODO: Get rid of m_innerDim if known at compile time
   Index m_innerDim;
 };
 

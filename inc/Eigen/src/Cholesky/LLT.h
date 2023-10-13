@@ -172,7 +172,6 @@ template<typename _MatrixType, int _UpLo> class LLT
 
     /** \returns the LLT decomposition matrix
       *
-      * TODO: document the storage layout
       */
     inline const MatrixType& matrixLLT() const
     {

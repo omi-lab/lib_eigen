@@ -388,7 +388,6 @@
   #elif defined __mips_msa
 
     // Limit MSA optimizations to little-endian CPUs for now.
-    // TODO: Perhaps, eventually support MSA optimizations on big-endian CPUs?
     #if defined(__BYTE_ORDER__) && (__BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__)
       #if defined(__LP64__)
         #define EIGEN_MIPS_64

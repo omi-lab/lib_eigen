@@ -1069,7 +1069,7 @@ template<> EIGEN_STRONG_INLINE Packet2d pabs(const Packet2d& a) { return vec_abs
 static inline Packet2l ConvertToPacket2l(const Packet2d& x) {
 #if EIGEN_GNUC_AT_LEAST(5, 4) || \
     (EIGEN_GNUC_AT(6, 1) && __GNUC_PATCHLEVEL__ >= 1)
-  return vec_cts(x, 0);    // TODO: check clang version.
+  return vec_cts(x, 0);
 #else
   double tmp[2];
   memcpy(tmp, &x, sizeof(tmp));

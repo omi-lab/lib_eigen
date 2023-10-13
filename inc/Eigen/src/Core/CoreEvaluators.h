@@ -95,7 +95,6 @@ struct evaluator : public unary_evaluator<T>
 };
 
 
-// TODO: Think about const-correctness
 template<typename T>
 struct evaluator<const T>
   : evaluator<T>
@@ -972,7 +971,6 @@ struct evaluator<Map<PlainObjectType, MapOptions, StrideType> >
 {
   typedef Map<PlainObjectType, MapOptions, StrideType> XprType;
   typedef typename XprType::Scalar Scalar;
-  // TODO: should check for smaller packet types once we can handle multi-sized packet types
   typedef typename packet_traits<Scalar>::type PacketScalar;
   
   enum {
@@ -1029,7 +1027,6 @@ struct evaluator<Block<ArgType, BlockRows, BlockCols, InnerPanel> >
 {
   typedef Block<ArgType, BlockRows, BlockCols, InnerPanel> XprType;
   typedef typename XprType::Scalar Scalar;
-  // TODO: should check for smaller packet types once we can handle multi-sized packet types
   typedef typename packet_traits<Scalar>::type PacketScalar;
   
   enum {
@@ -1200,7 +1197,6 @@ protected:
   const variable_if_dynamic<Index, ForwardLinearAccess ? Dynamic : 0> m_linear_offset;
 };
 
-// TODO: This evaluator does not actually use the child evaluator; 
 // all action is via the data() as returned by the Block expression.
 
 template<typename ArgType, int BlockRows, int BlockCols, bool InnerPanel> 
@@ -1215,7 +1211,6 @@ struct block_evaluator<ArgType, BlockRows, BlockCols, InnerPanel, /* HasDirectAc
   explicit block_evaluator(const XprType& block)
     : mapbase_evaluator<XprType, typename XprType::PlainObject>(block) 
   {
-    // TODO: for the 3.3 release, this should be turned to an internal assertion, but let's keep it as is for the beta lifetime
     eigen_assert(((internal::UIntPtr(block.data()) % EIGEN_PLAIN_ENUM_MAX(1,evaluator<XprType>::Alignment)) == 0) && "data is not aligned");
   }
 };
